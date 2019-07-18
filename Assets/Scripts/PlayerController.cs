@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     {
         m_Animator = GetComponent<Animator>();
         Messenger.AddListener<PlayerController>(Events.OnSlap, Slapped);
+        Messenger.AddListener<PlayerController>(Events.OnDrinkVodka, Vodkaed);
+        Messenger.AddListener<PlayerController>(Events.OnThrowPotato, Potatoed);
     }
 
     void Slapped(PlayerController controller)
@@ -28,6 +30,22 @@ public class PlayerController : MonoBehaviour
         if (controller == this)
         {
             m_Animator.SetTrigger("Slapped");
+        }
+    }
+
+    void Vodkaed(PlayerController controller)
+    {
+        if (controller == this)
+        {
+            m_Animator.SetTrigger("Vodkaed");
+        }
+    }
+
+    void Potatoed(PlayerController controller)
+    {
+        if (controller == this)
+        {
+            m_Animator.SetTrigger("Potatoed");
         }
     }
 
