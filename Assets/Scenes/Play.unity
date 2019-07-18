@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 656938012}
   - component: {fileID: 656938013}
   m_Layer: 0
-  m_Name: Head 2
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 683143600}
   - component: {fileID: 683143601}
   m_Layer: 0
-  m_Name: comrade_0
+  m_Name: Upper arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 694879354}
   - component: {fileID: 694879355}
   m_Layer: 0
-  m_Name: Neck 1
+  m_Name: Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -745,7 +745,7 @@ GameObject:
   - component: {fileID: 952543221}
   - component: {fileID: 952543222}
   m_Layer: 0
-  m_Name: Body 2 Arm Bottom Half copy
+  m_Name: Lower arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -813,7 +813,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!1 &986046972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,7 +1239,7 @@ GameObject:
   - component: {fileID: 1192285817}
   - component: {fileID: 1192285818}
   m_Layer: 0
-  m_Name: Body 1 Arm Top
+  m_Name: Upper arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1399,7 +1399,7 @@ GameObject:
   - component: {fileID: 1201205097}
   - component: {fileID: 1201205098}
   m_Layer: 0
-  m_Name: Head1
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1889,7 +1889,7 @@ GameObject:
   - component: {fileID: 1569121842}
   - component: {fileID: 1569121843}
   m_Layer: 0
-  m_Name: Head 2 Eyes
+  m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2082,7 +2082,7 @@ GameObject:
   - component: {fileID: 1828392091}
   - component: {fileID: 1828392092}
   m_Layer: 0
-  m_Name: Body 1 Arm Bottom
+  m_Name: Lower arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2162,7 +2162,7 @@ GameObject:
   - component: {fileID: 2006455693}
   - component: {fileID: 2006455694}
   m_Layer: 0
-  m_Name: Head 2 Neck
+  m_Name: Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

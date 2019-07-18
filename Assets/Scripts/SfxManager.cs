@@ -60,7 +60,7 @@ public class SfxManager : MonoBehaviour
                 PlayRandom(potatoHits);
                 break;
             case Clip.Slap:
-                PlayRandom(slaps);
+                StartCoroutine(PlayRandomDelayed(slaps, 0.125f));
                 break;
             default:
                 break;
@@ -69,6 +69,12 @@ public class SfxManager : MonoBehaviour
 
     void PlayRandom(AudioClip[] clips)
     {
+        m_AudioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
+    }
+
+    IEnumerator PlayRandomDelayed(AudioClip[] clips, float delay = 0f)
+    {
+        yield return new WaitForSeconds(delay);
         m_AudioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
     }
 }

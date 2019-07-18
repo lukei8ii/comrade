@@ -50,7 +50,8 @@ public class PlayerController : MonoBehaviour
         {
             if(Input.GetButtonUp("Fire4"))
             {
-                Debug.Log("Player 2 Slap");
+                m_Animator.SetTrigger("Slap");
+                Messenger.Broadcast<PlayerController>(Events.OnSlap, enemyPlayer);
             }
 
             if (Input.GetButtonUp("Fire5"))
