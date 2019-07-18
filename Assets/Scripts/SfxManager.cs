@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+//using System;
 
 public class SfxManager : MonoBehaviour
 {
@@ -27,7 +28,14 @@ public class SfxManager : MonoBehaviour
 	void Start()
     {
 		m_AudioSource = GetComponent<AudioSource>();
-	}
+
+        Messenger.AddListener<PlayerController>(Events.OnSlap, Slapped);
+    }
+
+    void Slapped(PlayerController controller)
+    {
+        Play(Clip.Slap);
+    }
 
     public void Play(Clip clip)
     {

@@ -446,9 +446,9 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 1869
-      y: 183
+      y: 194
       width: 122
-      height: 215
+      height: 204
     spriteID: ffead39b5cc81442bb1669ffe10e4f6c
     internalID: 0
     spriteBone: []
@@ -459,7 +459,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 1869, y: 183}
+    uvTransform: {x: 1869, y: 194}
   - name: Body 1
     originalName: 
     pivot: {x: 0.34718528, y: 0.31543463}

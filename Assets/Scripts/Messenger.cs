@@ -34,8 +34,9 @@ using UnityEngine.SceneManagement;
 
 public enum Events
 {
-	OnClick,
-	OnHover
+	OnSlap,
+	OnThrowPotato,
+    OnDrinkVodka
 }
 
 static internal class Messenger
