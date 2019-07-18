@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public GameObject potatoPrefab;
     public Transform potatoSpawn;
     public Vector2 potatoDirection;
+    public float potatoVerticalVariance = 45f;
     public float potatoForce;
 
     private Animator m_Animator;
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
         if (controller == this)
         {
             m_Animator.SetTrigger("Slapped");
+            StartCoroutine(ScreenShake(0.25f));
         }
     }
 
@@ -94,7 +97,17 @@ public class PlayerController : MonoBehaviour
     IEnumerator SpawnPotato()
     {
         yield return new WaitForSeconds(1.2f);
+        var verticalVariance = UnityEngine.Random.Range(potatoVerticalVariance * -1, potatoVerticalVariance);
+        var direction = new Vector2(potatoDirection.x * potatoForce, potatoDirection.y + verticalVariance);
         var thrownPotato = Instantiate(potatoPrefab, potatoSpawn.position, potatoSpawn.rotation);
-        thrownPotato.GetComponent<Rigidbody2D>().AddForce(potatoDirection * potatoForce);
+
+        thrownPotato.GetComponent<Rigidbody2D>().AddForce(direction);
+        thrownPotato.GetComponent<Rigidbody2D>().AddTorque(UnityEngine.Random.value * 5);
+    }
+
+    IEnumerator ScreenShake(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Camera.main.DOShakePosition(0.5f, 0.25f, 10);
     }
 }
