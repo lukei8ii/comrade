@@ -95,4 +95,11 @@ public class SfxManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         m_AudioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
     }
+
+    private void OnDestroy()
+    {
+        Messenger.RemoveListener<PlayerController>(Events.OnSlap, Slapped);
+        Messenger.RemoveListener<PlayerController>(Events.OnDrinkVodka, Vodkaed);
+        Messenger.RemoveListener<PlayerController>(Events.OnThrowPotato, Potatoed);
+    }
 }
