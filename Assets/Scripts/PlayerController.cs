@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
         var thrownPotato = Instantiate(potatoPrefab, potatoSpawn.position, potatoSpawn.rotation);
 
         thrownPotato.GetComponent<Rigidbody2D>().AddForce(direction);
-        thrownPotato.GetComponent<Rigidbody2D>().AddTorque(UnityEngine.Random.value * 5);
+        thrownPotato.GetComponent<Rigidbody2D>().AddTorque(UnityEngine.Random.value * 45);
     }
 
     IEnumerator ScreenShake(float delay)

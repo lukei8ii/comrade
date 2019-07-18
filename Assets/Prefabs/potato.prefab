@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 458799138539036028}
   - component: {fileID: 458799138539036029}
   - component: {fileID: 3043755641745884505}
-  - component: {fileID: 7547206667892884490}
+  - component: {fileID: 2085038188}
   m_Layer: 0
   m_Name: Potato
   m_TagString: Untagged
@@ -103,8 +103,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &7547206667892884490
-BoxCollider2D:
+--- !u!60 &2085038188
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -126,6 +126,15 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.23, y: 1.02}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.2893103, y: 0.35561278}
+      - {x: -0.13640745, y: 0.3754735}
+      - {x: -0.35480964, y: 0.2418553}
+      - {x: -0.46701366, y: 0.0771318}
+      - {x: -0.40317285, y: -0.11094256}
+      - {x: -0.280572, y: -0.29350913}
+      - {x: -0.03408078, y: -0.31884825}
+      - {x: 0.41515398, y: -0.32835945}
+      - {x: 0.5690252, y: -0.15026148}
+      - {x: 0.517674, y: 0.2651551}
