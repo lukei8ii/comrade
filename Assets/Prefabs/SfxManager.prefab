@@ -44,7 +44,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 044577baf68a34a749bb0c47a17a58d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ambiance: {fileID: 0}
+  ambiance: {fileID: 8300000, guid: fcabcc32326a34cfb9d18e7af02b8171, type: 3}
+  burps:
+  - {fileID: 8300000, guid: 31d66838887974cd5902d1ed6456810c, type: 3}
+  - {fileID: 8300000, guid: 7aeee59deb87e43418421217dfe0a949, type: 3}
+  - {fileID: 8300000, guid: 0eb44be957db84c47b09fe8898c56a54, type: 3}
+  drinks:
+  - {fileID: 8300000, guid: db554cf0ca9c94582b4086cbfcfabb42, type: 3}
+  - {fileID: 8300000, guid: abd779fe9d7c245a09666480d5146bae, type: 3}
+  - {fileID: 8300000, guid: f77667ef388d449f6b00fe538b287589, type: 3}
+  glassBreaks:
+  - {fileID: 8300000, guid: ec42dd590cc4d4ab4a00add8084957c1, type: 3}
+  - {fileID: 8300000, guid: 811a23db01d164ea2830436da98efbd4, type: 3}
+  - {fileID: 8300000, guid: 9fb33fe06278b450cbaa0181c0391d45, type: 3}
+  hiccups:
+  - {fileID: 8300000, guid: 8936d9fc65bdd4187b8ff618f4dc48c3, type: 3}
+  - {fileID: 8300000, guid: 78358add5d29e423aa28613f88b0e52b, type: 3}
+  - {fileID: 8300000, guid: b364c3f5b75794510bea8e19a6432162, type: 3}
+  passOut: {fileID: 0}
+  potatoHits:
+  - {fileID: 8300000, guid: 09ffabeb3c7344ddfb6274c4cfd52606, type: 3}
+  - {fileID: 8300000, guid: 646ad659050044875ad023b6528dee41, type: 3}
+  - {fileID: 8300000, guid: 7b4af5ac0f6da4005b7bbdf34ab53dc8, type: 3}
+  slaps:
+  - {fileID: 8300000, guid: f32cf2e7abbca40139f84d8a0ca43672, type: 3}
+  - {fileID: 8300000, guid: 828984c47de08451cbacf3dada66f5ac, type: 3}
+  - {fileID: 8300000, guid: 97f899d7df2484d3bb457d790c6c9c36, type: 3}
 --- !u!82 &7442385032204476177
 AudioSource:
   m_ObjectHideFlags: 0
