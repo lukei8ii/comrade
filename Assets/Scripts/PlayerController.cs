@@ -117,6 +117,13 @@ public class PlayerController : MonoBehaviour
         m_Animator.SetTrigger(trigger);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Messenger.Broadcast<PlayerController>(Events.OnPotatoHit, this);
+        StartCoroutine(SetTriggerDelay("Slapped", 0));
+        StartCoroutine(ScreenShake(0));
+    }
+
     private void OnDestroy()
     {
         Messenger.RemoveListener<PlayerController>(Events.OnSlap, Slapped);

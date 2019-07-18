@@ -36,6 +36,7 @@ public enum Events
 {
 	OnSlap,
 	OnThrowPotato,
+    OnPotatoHit,
     OnDrinkVodka
 }
 
