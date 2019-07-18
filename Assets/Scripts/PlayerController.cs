@@ -6,10 +6,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public int playerNumber;
-
+    public float slapCooldownTime = 1f;
+    public float vodkaCooldownTime = 1f;
+    public float potatoCooldownTime = 1f;
     public PlayerController enemyPlayer;
 
     private Animator m_Animator;
+    private float nextSlapTime = 0;
+    private float nextVodkaTime = 0;
+    private float nextPotatoTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -29,41 +34,35 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerNumber == 1)
+        if (playerNumber == 1 && Input.GetButtonUp("Fire1") || playerNumber == 2 && Input.GetButtonUp("Fire4"))
         {
-            if (Input.GetButtonUp("Fire1"))
+            if (Time.time > nextSlapTime)
             {
                 m_Animator.SetTrigger("Slap");
                 Messenger.Broadcast<PlayerController>(Events.OnSlap, enemyPlayer);
+                nextSlapTime = Time.time + slapCooldownTime;
             }
+            
+        }
 
-            if (Input.GetButtonUp("Fire2"))
-            {
-                Debug.Log("Player 1 Vodka");
-            }
-
-            if (Input.GetButtonUp("Fire3"))
-            {
-                Debug.Log("Player 1 Potato");
-            }
-        } else
+        if (playerNumber == 1 && Input.GetButtonUp("Fire2") || playerNumber == 2 && Input.GetButtonUp("Fire5"))
         {
-            if(Input.GetButtonUp("Fire4"))
+            if (Time.time > nextVodkaTime)
             {
-                m_Animator.SetTrigger("Slap");
-                Messenger.Broadcast<PlayerController>(Events.OnSlap, enemyPlayer);
-            }
-
-            if (Input.GetButtonUp("Fire5"))
-            {
-                Debug.Log("Player 2 Vodka");
-            }
-
-            if (Input.GetButtonUp("Fire6"))
-            {
-                Debug.Log("Player 2 Potato");
+                m_Animator.SetTrigger("Vodka");
+                Messenger.Broadcast<PlayerController>(Events.OnDrinkVodka, enemyPlayer);
+                nextVodkaTime = Time.time + vodkaCooldownTime;
             }
         }
-        
+
+        if (playerNumber == 1 && Input.GetButtonUp("Fire3") || playerNumber == 2 && Input.GetButtonUp("Fire6"))
+        {
+            if (Time.time > nextPotatoTime)
+            {
+                m_Animator.SetTrigger("Potato");
+                Messenger.Broadcast<PlayerController>(Events.OnThrowPotato, enemyPlayer);
+                nextPotatoTime = Time.time + potatoCooldownTime;
+            }
+        }      
     }
 }
