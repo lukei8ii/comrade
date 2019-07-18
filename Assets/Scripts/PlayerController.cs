@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         if (controller == this)
         {
-            m_Animator.SetTrigger("Slapped");
+            StartCoroutine(SetTriggerDelay("Slapped", 0.25f));
             StartCoroutine(ScreenShake(0.25f));
         }
     }
@@ -109,5 +109,11 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Camera.main.DOShakePosition(0.5f, 0.25f, 10);
+    }
+
+    IEnumerator SetTriggerDelay(string trigger, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        m_Animator.SetTrigger(trigger);
     }
 }
