@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using System;
 
 public class SfxManager : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class SfxManager : MonoBehaviour
         GlassBreak,
         Hiccup,
         PassOut,
+        Woosh,
         PotatoHit,
         Slap
     };
@@ -19,6 +19,7 @@ public class SfxManager : MonoBehaviour
     public AudioClip[] glassBreaks;
     public AudioClip[] hiccups;
     public AudioClip passOut;
+    public AudioClip[] wooshes;
     public AudioClip[] potatoHits;
     public AudioClip[] slaps;
 
@@ -30,11 +31,25 @@ public class SfxManager : MonoBehaviour
 		m_AudioSource = GetComponent<AudioSource>();
 
         Messenger.AddListener<PlayerController>(Events.OnSlap, Slapped);
+        Messenger.AddListener<PlayerController>(Events.OnDrinkVodka, Vodkaed);
+        Messenger.AddListener<PlayerController>(Events.OnThrowPotato, Potatoed);
     }
 
     void Slapped(PlayerController controller)
     {
         Play(Clip.Slap);
+    }
+
+    private void Vodkaed(PlayerController controller)
+    {
+        Play(Clip.Drink);
+    }
+
+    private void Potatoed(PlayerController controller)
+    {
+        // TODO: play woosh, if hit, play potatoHit
+        //Play(Clip.PotatoHit);
+        Play(Clip.Woosh);
     }
 
     public void Play(Clip clip)
@@ -45,7 +60,7 @@ public class SfxManager : MonoBehaviour
                 PlayRandom(burps);
                 break;
             case Clip.Drink:
-                PlayRandom(drinks);
+                StartCoroutine(PlayRandomDelayed(drinks, 0.25f));
                 break;
             case Clip.GlassBreak:
                 PlayRandom(glassBreaks);
@@ -55,6 +70,9 @@ public class SfxManager : MonoBehaviour
                 break;
             case Clip.PassOut:
                 m_AudioSource.PlayOneShot(passOut);
+                break;
+            case Clip.Woosh:
+                PlayRandom(wooshes);
                 break;
             case Clip.PotatoHit:
                 PlayRandom(potatoHits);

@@ -61,6 +61,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 78358add5d29e423aa28613f88b0e52b, type: 3}
   - {fileID: 8300000, guid: b364c3f5b75794510bea8e19a6432162, type: 3}
   passOut: {fileID: 0}
+  wooshes:
+  - {fileID: 8300000, guid: 81849f0b208064331a64d5901544e277, type: 3}
+  - {fileID: 8300000, guid: 20b3b3a76b4c34d9893106c24b893f0b, type: 3}
+  - {fileID: 8300000, guid: 1b5a07e3b430f48689e0c96f2f438267, type: 3}
   potatoHits:
   - {fileID: 8300000, guid: 09ffabeb3c7344ddfb6274c4cfd52606, type: 3}
   - {fileID: 8300000, guid: 646ad659050044875ad023b6528dee41, type: 3}
