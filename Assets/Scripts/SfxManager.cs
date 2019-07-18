@@ -72,7 +72,7 @@ public class SfxManager : MonoBehaviour
                 m_AudioSource.PlayOneShot(passOut);
                 break;
             case Clip.Woosh:
-                PlayRandom(wooshes);
+                StartCoroutine(PlayRandomDelayed(wooshes, 1f));
                 break;
             case Clip.PotatoHit:
                 PlayRandom(potatoHits);

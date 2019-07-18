@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
     public float vodkaCooldownTime = 1f;
     public float potatoCooldownTime = 1f;
     public PlayerController enemyPlayer;
+    public GameObject potatoPrefab;
+    public Transform potatoSpawn;
+    public Vector2 potatoDirection;
+    public float potatoForce;
 
     private Animator m_Animator;
     private float nextSlapTime = 0;
@@ -80,9 +84,17 @@ public class PlayerController : MonoBehaviour
             if (Time.time > nextPotatoTime)
             {
                 m_Animator.SetTrigger("Potato");
+                StartCoroutine(SpawnPotato());
                 Messenger.Broadcast<PlayerController>(Events.OnThrowPotato, enemyPlayer);
                 nextPotatoTime = Time.time + potatoCooldownTime;
             }
         }      
+    }
+
+    IEnumerator SpawnPotato()
+    {
+        yield return new WaitForSeconds(1.2f);
+        var thrownPotato = Instantiate(potatoPrefab, potatoSpawn.position, potatoSpawn.rotation);
+        thrownPotato.GetComponent<Rigidbody2D>().AddForce(potatoDirection * potatoForce);
     }
 }
