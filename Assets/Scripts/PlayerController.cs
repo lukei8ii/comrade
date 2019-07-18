@@ -37,7 +37,8 @@ public class PlayerController : MonoBehaviour
     {
         if (controller == this)
         {
-            m_Animator.SetTrigger("Vodkaed");
+            // TODO: see if anything should happen
+            //m_Animator.SetTrigger("Vodkaed");
         }
     }
 
@@ -45,7 +46,8 @@ public class PlayerController : MonoBehaviour
     {
         if (controller == this)
         {
-            m_Animator.SetTrigger("Potatoed");
+            // TODO: see if anything should happen
+            //m_Animator.SetTrigger("Potatoed");
         }
     }
 
