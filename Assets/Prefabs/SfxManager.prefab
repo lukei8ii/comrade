@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 044577baf68a34a749bb0c47a17a58d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ambiance: {fileID: 8300000, guid: fcabcc32326a34cfb9d18e7af02b8171, type: 3}
   burps:
   - {fileID: 8300000, guid: 31d66838887974cd5902d1ed6456810c, type: 3}
   - {fileID: 8300000, guid: 7aeee59deb87e43418421217dfe0a949, type: 3}
@@ -79,7 +78,8 @@ AudioSource:
   m_GameObject: {fileID: 7442385032204476176}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3624994777037565282, guid: 0589afbeddbda4e37adbd1b2cb77f4ea,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

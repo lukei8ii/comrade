@@ -13,7 +13,6 @@ public class SfxManager : MonoBehaviour
         Slap
     };
 
-    public AudioClip ambiance;
     public AudioClip[] burps;
     public AudioClip[] drinks;
     public AudioClip[] glassBreaks;
@@ -28,13 +27,6 @@ public class SfxManager : MonoBehaviour
 	void Start()
     {
 		m_AudioSource = GetComponent<AudioSource>();
-
-		if (ambiance)
-		{
-            m_AudioSource.clip = ambiance;
-            m_AudioSource.loop = true;
-            m_AudioSource.Play();
-		}
 	}
 
     public void Play(Clip clip)
