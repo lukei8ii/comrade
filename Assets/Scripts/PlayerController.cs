@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator SpawnPotato()
     {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.9f);
         var verticalVariance = UnityEngine.Random.Range(potatoVerticalVariance * -1, potatoVerticalVariance);
         var direction = new Vector2(potatoDirection.x * potatoForce, potatoDirection.y + verticalVariance);
         var thrownPotato = Instantiate(potatoPrefab, potatoSpawn.position, potatoSpawn.rotation);

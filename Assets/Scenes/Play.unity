@@ -406,6 +406,8 @@ GameObject:
   - component: {fileID: 540504713}
   - component: {fileID: 540504714}
   - component: {fileID: 540504715}
+  - component: {fileID: 540504717}
+  - component: {fileID: 540504716}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -466,7 +468,7 @@ MonoBehaviour:
   playerNumber: 1
   slapCooldownTime: 1
   vodkaCooldownTime: 1
-  potatoCooldownTime: 1
+  potatoCooldownTime: 2
   enemyPlayer: {fileID: 1060143337}
   potatoPrefab: {fileID: 458799138539036035, guid: e0588d6e6322448cfa5abdb3149c23b3,
     type: 3}
@@ -474,6 +476,49 @@ MonoBehaviour:
   potatoDirection: {x: 1, y: 0}
   potatoVerticalVariance: 90
   potatoForce: 1100
+--- !u!66 &540504716
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540504712}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.000005
+--- !u!50 &540504717
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540504712}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: 0b88b0775c95543e7ab6e29f8e27669e, type: 2}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &562737708
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +581,86 @@ Transform:
   m_Father: {fileID: 540504713}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 46.190002}
+--- !u!1 &602242998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 602242999}
+  - component: {fileID: 602243000}
+  m_Layer: 0
+  m_Name: Potato
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &602242999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602242998}
+  m_LocalRotation: {x: -0, y: -0, z: -0.113627896, w: 0.9935234}
+  m_LocalPosition: {x: -5.837994, y: -0.17312092, z: 0.0230515}
+  m_LocalScale: {x: 1.106912, y: 1.1069123, z: 1.106912}
+  m_Children: []
+  m_Father: {fileID: 952543221}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -13.049001}
+--- !u!212 &602243000
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602242998}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 2710342631948204413, guid: edb54a389201140bbbd16248c2556bd9,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.23, y: 1.02}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &607593863
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,9 +767,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656938011}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.7885375, y: 0.71264553, z: 2.1413932}
+  m_LocalPosition: {x: -2.7885375, y: 0.7126455, z: 2.141393}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1569121842}
   m_Father: {fileID: 1284193841}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -962,6 +1088,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &745880231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 745880232}
+  m_Layer: 0
+  m_Name: Potato Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &745880232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745880231}
+  m_LocalRotation: {x: -0, y: -0, z: 0.052556157, w: 0.998618}
+  m_LocalPosition: {x: -1.43, y: 2.8, z: 0.5534561}
+  m_LocalScale: {x: -1.1069124, y: 1.1069124, z: 1.1069123}
+  m_Children: []
+  m_Father: {fileID: 1060143335}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6.025}
 --- !u!1 &746266599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,7 +1192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746266599}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6935757, y: -0.15054023, z: 0.5534561}
+  m_LocalPosition: {x: 1.6935757, y: -0.06, z: 0.5534561}
   m_LocalScale: {x: 0.83571875, y: 0.83571875, z: 0.83571875}
   m_Children: []
   m_Father: {fileID: 540504713}
@@ -1071,6 +1227,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 607593864}
+  - {fileID: 602242999}
   m_Father: {fileID: 986046973}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1153,7 +1310,7 @@ Transform:
   - {fileID: 683143600}
   - {fileID: 952543221}
   m_Father: {fileID: 1060143335}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1005401429
 GameObject:
@@ -1266,6 +1423,7 @@ Transform:
   m_LocalPosition: {x: 3.5240002, y: -2.064, z: -0.5}
   m_LocalScale: {x: 0.903414, y: 0.903414, z: 0.903414}
   m_Children:
+  - {fileID: 745880232}
   - {fileID: 1200223184}
   - {fileID: 1149197816}
   - {fileID: 1284193841}
@@ -1309,11 +1467,12 @@ MonoBehaviour:
   vodkaCooldownTime: 1
   potatoCooldownTime: 1
   enemyPlayer: {fileID: 540504715}
-  potatoPrefab: {fileID: 0}
-  potatoSpawn: {fileID: 0}
-  potatoDirection: {x: 0, y: 0}
-  potatoVerticalVariance: 0.2
-  potatoForce: 0
+  potatoPrefab: {fileID: 458799138539036035, guid: e0588d6e6322448cfa5abdb3149c23b3,
+    type: 3}
+  potatoSpawn: {fileID: 745880232}
+  potatoDirection: {x: -1, y: 0}
+  potatoVerticalVariance: 90
+  potatoForce: 1100
 --- !u!66 &1060143338
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -1358,7 +1517,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060143334}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1400,7 +1559,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1060143335}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1149197817
 SpriteRenderer:
@@ -1843,7 +2002,7 @@ Transform:
   m_LocalScale: {x: 0.83571875, y: 0.83571875, z: 0.83571875}
   m_Children: []
   m_Father: {fileID: 1060143335}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1201205096
 GameObject:
@@ -1855,6 +2014,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1201205097}
   - component: {fileID: 1201205098}
+  - component: {fileID: 1201205099}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -1925,6 +2085,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1201205099
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201205096}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.36105382, y: 0.3726173}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.2725278, y: 0.41029543}
+    oldSize: {x: 2.58, y: 4.92}
+    newSize: {x: 2.58, y: 4.92}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0679598, y: 4.546899}
+  m_EdgeRadius: 0
 --- !u!1 &1284193840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,10 +2139,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 656938012}
-  - {fileID: 1569121842}
   - {fileID: 2006455693}
   m_Father: {fileID: 1060143335}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1292510551
 GameObject:
@@ -2360,11 +2545,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1569121841}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.064, y: 2.566, z: 2.1413932}
+  m_LocalPosition: {x: -0.27, y: 1.83, z: 2.141393}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1284193841}
-  m_RootOrder: 1
+  m_Father: {fileID: 656938012}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1569121843
 SpriteRenderer:
@@ -2662,11 +2847,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006455692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.955, y: 0.212, z: 2.1413932}
+  m_LocalPosition: {x: -2.955, y: 0.212, z: 2.141393}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1284193841}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2006455694
 SpriteRenderer:
