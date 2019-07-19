@@ -15,7 +15,7 @@ public class GameStateManager : MonoBehaviour
     {
         gameOverCanvas.alpha = 0;
 
-        Messenger.AddListener<PlayerController>(Events.GameOver, GameOver);
+        Messenger.AddListener<PlayerController>(Events.OnGameOver, GameOver);
     }
 
     void GameOver(PlayerController controller)
@@ -32,6 +32,6 @@ public class GameStateManager : MonoBehaviour
 
     void OnDestroy()
     {
-        Messenger.RemoveListener<PlayerController>(Events.GameOver, GameOver);
+        Messenger.RemoveListener<PlayerController>(Events.OnGameOver, GameOver);
     }
 }

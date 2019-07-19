@@ -25,7 +25,7 @@
 //#define LOG_ALL_MESSAGES
 //#define LOG_ADD_LISTENER
 //#define LOG_BROADCAST_MESSAGE
-#define REQUIRE_LISTENER
+//#define REQUIRE_LISTENER
 
 using System;
 using System.Collections.Generic;
@@ -35,10 +35,16 @@ using UnityEngine.SceneManagement;
 public enum Events
 {
 	OnSlap,
+    OnSlapHit,
+    OnSlapDeflected,
 	OnThrowPotato,
     OnPotatoHit,
+    OnPotatoDeflected,
     OnDrinkVodka,
-    GameOver
+    OnVodkaHit,
+    OnVodkaDeflected,
+    OnStunned,
+    OnGameOver
 }
 
 static internal class Messenger

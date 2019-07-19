@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 458799138539036029}
   - component: {fileID: 3043755641745884505}
   - component: {fileID: 2085038188}
+  - component: {fileID: 5521093016790620080}
   m_Layer: 0
   m_Name: Potato
-  m_TagString: Untagged
+  m_TagString: Potato
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,3 +139,16 @@ PolygonCollider2D:
       - {x: 0.41515398, y: -0.32835945}
       - {x: 0.5690252, y: -0.15026148}
       - {x: 0.517674, y: 0.2651551}
+--- !u!114 &5521093016790620080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458799138539036035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c02d4b8bfcd4846a741bec5cbc416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeSpan: 3

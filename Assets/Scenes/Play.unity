@@ -991,7 +991,7 @@ Transform:
   - {fileID: 414115824}
   - {fileID: 562737709}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &540504714
 Animator:
@@ -1034,13 +1034,18 @@ MonoBehaviour:
   potatoSpawn: {fileID: 588041553}
   potatoDirection: {x: 1, y: 0}
   potatoVerticalVariance: 90
-  potatoForce: 1100
+  potatoForce: 900
   blush: {fileID: 1214943685}
   blush2: {fileID: 204056678}
-  initialHealth: 10
+  initialHealth: 15
   slapDamage: 2
-  potatoDamage: 1
-  vodkaHealth: 1
+  potatoDamage: 3
+  vodkaHealth: 2
+  slapHitDelay: 0.25
+  drinkHitDelay: 0.25
+  potatoThrowDelay: 0.85
+  potatoHitDelay: 0.125
+  stunTime: 0.5
 --- !u!66 &540504716
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -1653,7 +1658,7 @@ Transform:
   m_LocalScale: {x: 2.37048, y: 2.37048, z: 2.37048}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &745880231
 GameObject:
@@ -1775,6 +1780,7 @@ GameObject:
   m_Component:
   - component: {fileID: 952543221}
   - component: {fileID: 952543222}
+  - component: {fileID: 952543223}
   m_Layer: 0
   m_Name: Lower arm
   m_TagString: Untagged
@@ -1847,6 +1853,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!61 &952543223
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952543220}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.27010128, y: -1.0053784}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.3290498, y: 0.88520247}
+    oldSize: {x: 1.58, y: 2.61}
+    newSize: {x: 1.58, y: 2.61}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.5799999, y: 2.61}
+  m_EdgeRadius: 0
 --- !u!1 &986046972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,7 +2028,7 @@ Transform:
   - {fileID: 1284193841}
   - {fileID: 986046973}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1060143336
 Animator:
@@ -2042,10 +2074,15 @@ MonoBehaviour:
   potatoForce: 1100
   blush: {fileID: 119279634}
   blush2: {fileID: 257861665}
-  initialHealth: 10
+  initialHealth: 15
   slapDamage: 2
-  potatoDamage: 1
-  vodkaHealth: 1
+  potatoDamage: 3
+  vodkaHealth: 2
+  slapHitDelay: 0.25
+  drinkHitDelay: 0.25
+  potatoThrowDelay: 0.85
+  potatoHitDelay: 0.125
+  stunTime: 0.5
 --- !u!66 &1060143338
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -2476,7 +2513,7 @@ Transform:
   m_LocalScale: {x: 0.903414, y: 0.903414, z: 0.903414}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1192285816
 GameObject:
@@ -3427,7 +3464,7 @@ PrefabInstance:
     - target: {fileID: 8563420334088737547, guid: 75a033306556f414dad6408ea2fcdd77,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8563420334088737547, guid: 75a033306556f414dad6408ea2fcdd77,
         type: 3}
@@ -3605,7 +3642,7 @@ Transform:
   m_LocalScale: {x: 0.903414, y: 0.903414, z: 0.903414}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1654959238
 BoxCollider2D:
@@ -3688,6 +3725,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1828392091}
   - component: {fileID: 1828392092}
+  - component: {fileID: 1828392093}
   m_Layer: 0
   m_Name: Lower arm
   m_TagString: Untagged
@@ -3760,6 +3798,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1828392093
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828392090}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.14700806, y: -1.1597314}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.63868684, y: 0.94777274}
+    oldSize: {x: 1.06, y: 2.59}
+    newSize: {x: 1.06, y: 2.59}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.06, y: 2.5900002}
+  m_EdgeRadius: 0
 --- !u!1 &2006455692
 GameObject:
   m_ObjectHideFlags: 0
@@ -3918,7 +3982,7 @@ Transform:
   m_LocalScale: {x: 0.903414, y: 0.903414, z: 0.903414}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2104552554
 GameObject:

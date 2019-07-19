@@ -30,8 +30,8 @@ public class SfxManager : MonoBehaviour
     {
 		m_AudioSource = GetComponent<AudioSource>();
 
-        Messenger.AddListener<PlayerController>(Events.OnSlap, Slapped);
-        Messenger.AddListener<PlayerController>(Events.OnDrinkVodka, Vodkaed);
+        Messenger.AddListener<PlayerController>(Events.OnSlapHit, Slapped);
+        Messenger.AddListener<PlayerController>(Events.OnVodkaHit, Vodkaed);
         Messenger.AddListener<PlayerController>(Events.OnThrowPotato, PotatoThrown);
         Messenger.AddListener<PlayerController>(Events.OnPotatoHit, PotatoHit);
     }
@@ -64,7 +64,7 @@ public class SfxManager : MonoBehaviour
                 PlayRandom(burps);
                 break;
             case Clip.Drink:
-                StartCoroutine(PlayRandomDelayed(drinks, 0.25f));
+                PlayRandom(drinks);
                 break;
             case Clip.GlassBreak:
                 PlayRandom(glassBreaks);
@@ -76,13 +76,13 @@ public class SfxManager : MonoBehaviour
                 m_AudioSource.PlayOneShot(passOut);
                 break;
             case Clip.Woosh:
-                StartCoroutine(PlayRandomDelayed(wooshes, 1f));
+                PlayRandom(wooshes);
                 break;
             case Clip.PotatoHit:
                 PlayRandom(potatoHits);
                 break;
             case Clip.Slap:
-                StartCoroutine(PlayRandomDelayed(slaps, 0.125f));
+                PlayRandom(slaps);
                 break;
             default:
                 break;
@@ -102,8 +102,8 @@ public class SfxManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        Messenger.RemoveListener<PlayerController>(Events.OnSlap, Slapped);
-        Messenger.RemoveListener<PlayerController>(Events.OnDrinkVodka, Vodkaed);
+        Messenger.RemoveListener<PlayerController>(Events.OnSlapHit, Slapped);
+        Messenger.RemoveListener<PlayerController>(Events.OnVodkaHit, Vodkaed);
         Messenger.RemoveListener<PlayerController>(Events.OnThrowPotato, PotatoThrown);
         Messenger.RemoveListener<PlayerController>(Events.OnPotatoHit, PotatoHit);
     }

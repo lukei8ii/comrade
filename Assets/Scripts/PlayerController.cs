@@ -6,6 +6,21 @@ using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum State
+    {
+        Idle,
+        Slapping,
+        Drinking,
+        Throwing,
+        Stunned
+    }
+
+    struct ThrownPotato
+    {
+        public Rigidbody2D Potato;
+        public PlayerController Owner;
+    }
+
     public int playerNumber;
     public float slapCooldownTime = 1f;
     public float vodkaCooldownTime = 1f;
@@ -23,105 +38,208 @@ public class PlayerController : MonoBehaviour
     public int potatoDamage = 1;
     public int vodkaHealth = 1;
 
-    private Animator m_Animator;
-    private float nextSlapTime = 0;
-    private float nextVodkaTime = 0;
-    private float nextPotatoTime = 0;
-    private int health;
+    public float slapHitDelay = 0.5f;
+    public float drinkHitDelay = 0.5f;
+    public float potatoThrowDelay = 0.5f;
+    public float potatoHitDelay = 0.5f;
+    public float stunTime = 0.5f;
+
+    Animator m_Animator;
+    float m_NextSlapTime = 0;
+    float m_NextVodkaTime = 0;
+    float m_NextPotatoTime = 0;
+    int m_Health;
+    State m_State;
+    ThrownPotato m_ThrownPotato;
+
+    IEnumerator m_Slapping;
+    IEnumerator m_Drinking;
+    IEnumerator m_Throwing;
 
     // Start is called before the first frame update
     void Start()
     {
         m_Animator = GetComponent<Animator>();
-        Messenger.AddListener<PlayerController>(Events.OnSlap, Slapped);
-        Messenger.AddListener<PlayerController>(Events.OnDrinkVodka, Vodkaed);
-        Messenger.AddListener<PlayerController>(Events.OnThrowPotato, Potatoed);
+        Messenger.AddListener<PlayerController>(Events.OnSlapHit, SlapHit);
+        Messenger.AddListener<PlayerController>(Events.OnStunned, Stunned);
 
         SetBlushOpacity(0);
-        health = initialHealth;
+        m_Health = initialHealth;
+        m_State = State.Idle;
     }
 
-    void Slapped(PlayerController controller)
+    void SlapHit(PlayerController controller)
     {
         if (controller == this)
         {
-            StartCoroutine(SetTriggerDelay("Slapped", 0.25f));
-            StartCoroutine(ScreenShake(0.25f));
-            StartCoroutine(TakeDamageDelay(slapDamage, 0.25f));
+            switch (m_State)
+            {
+                case State.Drinking:
+                    // Dodge the slap and cause slapper to be stunned
+                    Messenger.Broadcast<PlayerController>(Events.OnStunned, enemyPlayer);
+                    break;
+                case State.Throwing:
+                    // Have potato deflected back at you
+                    EnemyDeflectedPotato();
+                    Messenger.Broadcast<PlayerController>(Events.OnPotatoDeflected, enemyPlayer);
+                    break;
+                case State.Slapping:
+                case State.Idle:
+                    // Take damage
+                    m_Animator.SetTrigger("Slapped");
+                    ScreenShake();
+                    TakeDamage(slapDamage);
+                    break;
+            }
         }
     }
 
-    void Vodkaed(PlayerController controller)
+    void Stunned(PlayerController controller)
     {
         if (controller == this)
         {
-            // TODO: see if anything should happen
-            //m_Animator.SetTrigger("Vodkaed");
-        }
-    }
+            StopCoroutine(m_Slapping);
+            StopCoroutine(m_Drinking);
+            StopCoroutine(m_Throwing);
+            m_State = State.Idle;
 
-    void Potatoed(PlayerController controller)
-    {
-        if (controller == this)
-        {
-            // TODO: see if anything should happen
-            //m_Animator.SetTrigger("Potatoed");
+            StartCoroutine(Stun(stunTime));
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        var blushOpacity = 1f - (float)health / (float)initialHealth;
+        var blushOpacity = 1f - (float)m_Health / (float)initialHealth;
         SetBlushOpacity(blushOpacity);
 
         if (playerNumber == 1 && Input.GetButtonUp("Fire1") || playerNumber == 2 && Input.GetButtonUp("Fire4"))
         {
-            if (Time.time > nextSlapTime)
+            if (Time.time > m_NextSlapTime)
             {
-                m_Animator.SetTrigger("Slap");
-                Messenger.Broadcast<PlayerController>(Events.OnSlap, enemyPlayer);
-                nextSlapTime = Time.time + slapCooldownTime;
+                m_Slapping = TrySlap();
+                StartCoroutine(m_Slapping);
             }
         }
 
         if (playerNumber == 1 && Input.GetButtonUp("Fire2") || playerNumber == 2 && Input.GetButtonUp("Fire5"))
         {
-            if (Time.time > nextVodkaTime)
+            if (Time.time > m_NextVodkaTime)
             {
-                m_Animator.SetTrigger("Vodka");
-                Heal(vodkaHealth);
-                Messenger.Broadcast<PlayerController>(Events.OnDrinkVodka, enemyPlayer);
-                nextVodkaTime = Time.time + vodkaCooldownTime;
+                m_Drinking = TryVodka();
+                StartCoroutine(m_Drinking);
             }
         }
 
         if (playerNumber == 1 && Input.GetButtonUp("Fire3") || playerNumber == 2 && Input.GetButtonUp("Fire6"))
         {
-            if (Time.time > nextPotatoTime)
+            if (Time.time > m_NextPotatoTime)
             {
-                m_Animator.SetTrigger("Potato");
-                StartCoroutine(SpawnPotato());
-                Messenger.Broadcast<PlayerController>(Events.OnThrowPotato, enemyPlayer);
-                nextPotatoTime = Time.time + potatoCooldownTime;
+                m_Throwing = TryPotato();
+                StartCoroutine(m_Throwing);
             }
         }      
     }
 
-    IEnumerator SpawnPotato()
+    // Broadcast that we are slapping
+    // Start the ability cooldown
+    // Start the slapping animation
+    // Wait for an amount of time
+    // (Coroutine can be stopped during this time)
+    // Broadcast that the slap hit
+    IEnumerator TrySlap()
     {
-        yield return new WaitForSeconds(0.9f);
+        m_NextSlapTime = Time.time + slapCooldownTime;
+        m_State = State.Slapping;
+        m_Animator.SetTrigger("Slap");
+        Messenger.Broadcast<PlayerController>(Events.OnSlap, this);
+        yield return new WaitForSeconds(slapHitDelay);
+        Messenger.Broadcast<PlayerController>(Events.OnSlapHit, enemyPlayer);
+
+        // Reset state
+        m_State = State.Idle;
+    }
+
+    // Broadcast that we are drinking
+    // Start the ability cooldown
+    // Start the drinking animation
+    // Wait for an amount of time
+    // (Coroutine can be stopped during this time)
+    // Broadcast that the drink was drunk
+    IEnumerator TryVodka()
+    {
+        m_NextVodkaTime = Time.time + vodkaCooldownTime;
+        m_Animator.SetTrigger("Vodka");
+        m_State = State.Drinking;
+        Messenger.Broadcast<PlayerController>(Events.OnDrinkVodka, this);
+        yield return new WaitForSeconds(drinkHitDelay);
+        Messenger.Broadcast<PlayerController>(Events.OnVodkaHit, this);
+        Heal(vodkaHealth);
+
+        // Reset state
+        m_State = State.Idle;
+    }
+
+    // Start the ability cooldown
+    // Start the throwing animation
+    // Wait for an amount of time
+    // Broadcast that the potato was thrown
+    // Spawn potato
+    // (Potato can be deflected on collision with enemy arm)
+    IEnumerator TryPotato()
+    {
+        m_NextPotatoTime = Time.time + potatoCooldownTime;
+        m_Animator.SetTrigger("Potato");
+        yield return new WaitForSeconds(potatoThrowDelay);
+        Messenger.Broadcast<PlayerController>(Events.OnThrowPotato, this);
+        SpawnPotato();
+
+        m_State = State.Throwing;
+        yield return new WaitForSeconds(potatoHitDelay);
+        m_State = State.Idle;
+    }
+
+    IEnumerator Stun(float seconds)
+    {
+        m_Animator.SetTrigger("Stunned");
+        m_State = State.Stunned;
+        yield return new WaitForSeconds(seconds);
+        m_State = State.Idle;
+    }
+
+    void SpawnPotato()
+    {
         var verticalVariance = UnityEngine.Random.Range(potatoVerticalVariance * -1, potatoVerticalVariance);
         var direction = new Vector2(potatoDirection.x * potatoForce, potatoDirection.y + verticalVariance);
         var thrownPotato = Instantiate(potatoPrefab, potatoSpawn.position, potatoSpawn.rotation);
+        m_ThrownPotato.Potato = thrownPotato.GetComponent<Rigidbody2D>();
+        m_ThrownPotato.Owner = this;
 
-        thrownPotato.GetComponent<Rigidbody2D>().AddForce(direction);
-        thrownPotato.GetComponent<Rigidbody2D>().AddTorque(UnityEngine.Random.value * 45);
+        m_ThrownPotato.Potato.AddForce(direction);
+        m_ThrownPotato.Potato.AddTorque(UnityEngine.Random.value * 45);
     }
 
-    IEnumerator ScreenShake(float delay)
+    void EnemyDeflectedPotato()
+    {
+        StopCoroutine(m_Throwing);
+        m_State = State.Idle;
+
+        var verticalVariance = UnityEngine.Random.Range(potatoVerticalVariance * -1, potatoVerticalVariance);
+        var direction = new Vector2(potatoDirection.x * potatoForce * -2, potatoDirection.y + verticalVariance);
+
+        m_ThrownPotato.Owner = enemyPlayer;
+        m_ThrownPotato.Potato.AddForce(direction);
+        m_ThrownPotato.Potato.AddTorque(UnityEngine.Random.value * 45);
+    }
+
+    IEnumerator ScreenShakeDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
+        ScreenShake();
+    }
+
+    void ScreenShake()
+    {
         Camera.main.DOShakePosition(0.5f, 0.25f, 10);
     }
 
@@ -133,19 +251,22 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Messenger.Broadcast<PlayerController>(Events.OnPotatoHit, this);
-        StartCoroutine(SetTriggerDelay("Slapped", 0));
-        StartCoroutine(ScreenShake(0));
-        TakeDamage(potatoDamage);
+        if (collision.gameObject.CompareTag("Potato") && collision.rigidbody != m_ThrownPotato.Potato || m_ThrownPotato.Owner == enemyPlayer)
+        {
+            Messenger.Broadcast<PlayerController>(Events.OnPotatoHit, this);
+            m_Animator.SetTrigger("Slapped");
+            ScreenShake();
+            TakeDamage(potatoDamage);
+        }
     }
 
     void Heal(int amount)
     {
-        health += amount;
+        m_Health += amount;
 
-        if (health > initialHealth)
+        if (m_Health > initialHealth)
         {
-            health = initialHealth;
+            m_Health = initialHealth;
         }
     }
 
@@ -157,16 +278,16 @@ public class PlayerController : MonoBehaviour
 
     void TakeDamage(int amount)
     {
-        health -= amount;
+        m_Health -= amount;
 
-        if (health < 0)
+        if (m_Health < 0)
         {
-            health = 0;
+            m_Health = 0;
         }
 
-        if (health == 0)
+        if (m_Health == 0)
         {
-            Messenger.Broadcast<PlayerController>(Events.GameOver, enemyPlayer);
+            Messenger.Broadcast<PlayerController>(Events.OnGameOver, enemyPlayer);
         }
     }
 
@@ -178,8 +299,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
-        Messenger.RemoveListener<PlayerController>(Events.OnSlap, Slapped);
-        Messenger.RemoveListener<PlayerController>(Events.OnDrinkVodka, Vodkaed);
-        Messenger.RemoveListener<PlayerController>(Events.OnThrowPotato, Potatoed);
+        Messenger.RemoveListener<PlayerController>(Events.OnSlapHit, SlapHit);
+        Messenger.RemoveListener<PlayerController>(Events.OnStunned, Stunned);
     }
 }
