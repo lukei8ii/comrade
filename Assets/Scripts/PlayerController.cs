@@ -83,6 +83,12 @@ public class PlayerController : MonoBehaviour
                     Messenger.Broadcast<PlayerController>(Events.OnPotatoDeflected, enemyPlayer);
                     break;
                 case State.Slapping:
+                    StopActions();
+                    // Take damage
+                    m_Animator.SetTrigger("Slapped");
+                    ScreenShake();
+                    TakeDamage(slapDamage);
+                    break;
                 case State.Idle:
                     // Take damage
                     m_Animator.SetTrigger("Slapped");
@@ -97,11 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         if (controller == this)
         {
-            StopCoroutine(m_Slapping);
-            StopCoroutine(m_Drinking);
-            StopCoroutine(m_Throwing);
-            m_State = State.Idle;
-
+            StopActions();
             StartCoroutine(Stun(stunTime));
         }
     }
@@ -256,7 +258,23 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("Slapped");
             ScreenShake();
             TakeDamage(potatoDamage);
+
+            StopActions();
         }
+    }
+
+    void StopActions()
+    {
+        if (m_Slapping != null)
+            StopCoroutine(m_Slapping);
+
+        if (m_Drinking != null)
+            StopCoroutine(m_Drinking);
+
+        if (m_Throwing != null)
+            StopCoroutine(m_Throwing);
+
+        m_State = State.Idle;
     }
 
     void Heal(int amount)
