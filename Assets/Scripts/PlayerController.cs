@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
         Slapping,
         Drinking,
         Throwing,
-        Stunned
+        Stunned,
+        GameOver
     }
 
     struct ThrownPotato
@@ -50,9 +51,9 @@ public class PlayerController : MonoBehaviour
     State m_State;
     ThrownPotato m_ThrownPotato;
 
-    IEnumerator m_Slapping;
-    IEnumerator m_Drinking;
-    IEnumerator m_Throwing;
+    Coroutine m_Slapping;
+    Coroutine m_Drinking;
+    Coroutine m_Throwing;
 
     // Start is called before the first frame update
     void Start()
@@ -60,10 +61,11 @@ public class PlayerController : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         Messenger.AddListener<PlayerController>(Events.OnSlapHit, SlapHit);
         Messenger.AddListener<PlayerController>(Events.OnStunned, Stunned);
+        Messenger.AddListener<PlayerController>(Events.OnGameOver, GameOver);
 
         SetBlushOpacity(0);
         m_Health = initialHealth;
-        m_State = State.Idle;
+        SetState(State.Idle);
         m_NextActionTime = Time.time;
     }
 
@@ -83,7 +85,6 @@ public class PlayerController : MonoBehaviour
                     Messenger.Broadcast<PlayerController>(Events.OnPotatoDeflected, enemyPlayer);
                     break;
                 case State.Slapping:
-                    StopActions();
                     // Take damage
                     m_Animator.SetTrigger("Slapped");
                     ScreenShake();
@@ -103,9 +104,13 @@ public class PlayerController : MonoBehaviour
     {
         if (controller == this)
         {
-            StopActions();
             StartCoroutine(Stun(stunTime));
         }
+    }
+
+    void GameOver(PlayerController controller)
+    {
+        SetState(State.GameOver);
     }
 
     // Update is called once per frame
@@ -114,12 +119,14 @@ public class PlayerController : MonoBehaviour
         var blushOpacity = 1f - (float)m_Health / (float)initialHealth;
         SetBlushOpacity(blushOpacity);
 
+        if (m_State == State.Stunned || m_State == State.GameOver)
+            return;
+
         if (playerNumber == 1 && Input.GetButtonUp("Fire1") || playerNumber == 2 && Input.GetButtonUp("Fire4"))
         {
             if (Time.time > m_NextActionTime)
             {
-                m_Slapping = TrySlap();
-                StartCoroutine(m_Slapping);
+                m_Slapping = StartCoroutine(TrySlap());
             }
         }
 
@@ -127,8 +134,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Time.time > m_NextActionTime)
             {
-                m_Drinking = TryVodka();
-                StartCoroutine(m_Drinking);
+                m_Drinking = StartCoroutine(TryVodka());
             }
         }
 
@@ -136,8 +142,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Time.time > m_NextActionTime)
             {
-                m_Throwing = TryPotato();
-                StartCoroutine(m_Throwing);
+                m_Throwing = StartCoroutine(TryPotato());
             }
         }      
     }
@@ -151,14 +156,18 @@ public class PlayerController : MonoBehaviour
     IEnumerator TrySlap()
     {
         m_NextActionTime = Time.time + slapCooldownTime;
-        m_State = State.Slapping;
-        m_Animator.SetTrigger("Slap");
+        SetState(State.Slapping);
+        
         Messenger.Broadcast<PlayerController>(Events.OnSlap, this);
-        yield return new WaitForSeconds(slapHitDelay);
-        Messenger.Broadcast<PlayerController>(Events.OnSlapHit, enemyPlayer);
 
-        // Reset state
-        m_State = State.Idle;
+        yield return new WaitForSeconds(slapHitDelay);
+
+        if (m_State != State.Stunned)
+            SetState(State.Idle);
+
+        Messenger.Broadcast<PlayerController>(Events.OnSlapHit, enemyPlayer);
+        
+        yield return null;
     }
 
     // Broadcast that we are drinking
@@ -170,15 +179,18 @@ public class PlayerController : MonoBehaviour
     IEnumerator TryVodka()
     {
         m_NextActionTime = Time.time + vodkaCooldownTime;
-        m_Animator.SetTrigger("Vodka");
-        m_State = State.Drinking;
+        
+        SetState(State.Drinking);
         Messenger.Broadcast<PlayerController>(Events.OnDrinkVodka, this);
         yield return new WaitForSeconds(drinkHitDelay);
+
+        if (m_State != State.Stunned)
+            SetState(State.Idle);
+
         Messenger.Broadcast<PlayerController>(Events.OnVodkaHit, this);
         Heal(vodkaHealth);
 
-        // Reset state
-        m_State = State.Idle;
+        yield return null;
     }
 
     // Start the ability cooldown
@@ -190,22 +202,28 @@ public class PlayerController : MonoBehaviour
     IEnumerator TryPotato()
     {
         m_NextActionTime = Time.time + potatoCooldownTime;
-        m_Animator.SetTrigger("Potato");
+
+        SetState(State.Throwing);
         yield return new WaitForSeconds(potatoThrowDelay);
         Messenger.Broadcast<PlayerController>(Events.OnThrowPotato, this);
         SpawnPotato();
 
-        m_State = State.Throwing;
         yield return new WaitForSeconds(potatoHitDelay);
-        m_State = State.Idle;
+
+        if (m_State != State.Stunned)
+            SetState(State.Idle);
+
+        yield return null;
     }
 
     IEnumerator Stun(float seconds)
     {
-        m_Animator.SetTrigger("Stunned");
-        m_State = State.Stunned;
+        m_Animator.SetBool("Stunned", true);
+        SetState(State.Stunned);
         yield return new WaitForSeconds(seconds);
-        m_State = State.Idle;
+        SetState(State.Idle);
+        m_Animator.SetBool("Stunned", false);
+        yield return null;
     }
 
     void SpawnPotato()
@@ -223,7 +241,7 @@ public class PlayerController : MonoBehaviour
     void EnemyDeflectedPotato()
     {
         StopCoroutine(m_Throwing);
-        m_State = State.Idle;
+        SetState(State.Idle);
 
         var verticalVariance = UnityEngine.Random.Range(potatoVerticalVariance * -1, potatoVerticalVariance);
         var direction = new Vector2(potatoDirection.x * potatoForce * -2, potatoDirection.y + verticalVariance);
@@ -252,29 +270,39 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Potato") && collision.rigidbody != m_ThrownPotato.Potato || m_ThrownPotato.Owner == enemyPlayer)
+        if (collision.gameObject.CompareTag("Potato") &&
+            collision.rigidbody != m_ThrownPotato.Potato ||
+            m_ThrownPotato.Owner == enemyPlayer)
         {
             Messenger.Broadcast<PlayerController>(Events.OnPotatoHit, this);
             m_Animator.SetTrigger("Slapped");
             ScreenShake();
             TakeDamage(potatoDamage);
 
-            StopActions();
+            SetState(State.Idle);
         }
     }
 
-    void StopActions()
+    void SetState(State state)
     {
-        if (m_Slapping != null)
-            StopCoroutine(m_Slapping);
+        m_State = state;
+        Debug.Log($"{playerNumber} - {m_State}");
 
-        if (m_Drinking != null)
-            StopCoroutine(m_Drinking);
-
-        if (m_Throwing != null)
-            StopCoroutine(m_Throwing);
-
-        m_State = State.Idle;
+        switch (state)
+        {
+            case State.Slapping:
+                m_Animator.SetTrigger("Slap");
+                break;
+            case State.Drinking:
+                m_Animator.SetTrigger("Vodka");
+                break;
+            case State.Throwing:
+                m_Animator.SetTrigger("Potato");
+                break;
+            case State.Stunned:
+            case State.Idle:
+                break;
+        }
     }
 
     void Heal(int amount)

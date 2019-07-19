@@ -346,7 +346,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140113480}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -1043,9 +1043,9 @@ MonoBehaviour:
   vodkaHealth: 2
   slapHitDelay: 0.25
   drinkHitDelay: 0.25
-  potatoThrowDelay: 0.85
+  potatoThrowDelay: 0.6
   potatoHitDelay: 0.125
-  stunTime: 0.5
+  stunTime: 1.5
 --- !u!66 &540504716
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -1337,7 +1337,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656938011}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.7885375, y: 0.7126455, z: 2.141393}
+  m_LocalPosition: {x: -2.788538, y: 0.7126455, z: 2.141393}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 119279633}
@@ -1408,7 +1408,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 0.57981235, y: 0.8254285}
+  m_Offset: {x: 0.28702492, y: 0.8254285}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5280416, y: 0.26205108}
@@ -1419,7 +1419,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0742536, y: 4.6696043}
+  m_Size: {x: 1.1864468, y: 4.6696043}
   m_EdgeRadius: 0
 --- !u!1 &683143599
 GameObject:
@@ -2071,7 +2071,7 @@ MonoBehaviour:
   potatoSpawn: {fileID: 745880232}
   potatoDirection: {x: -1, y: 0}
   potatoVerticalVariance: 90
-  potatoForce: 1100
+  potatoForce: 900
   blush: {fileID: 119279634}
   blush2: {fileID: 257861665}
   initialHealth: 15
@@ -2080,9 +2080,9 @@ MonoBehaviour:
   vodkaHealth: 2
   slapHitDelay: 0.25
   drinkHitDelay: 0.25
-  potatoThrowDelay: 0.85
+  potatoThrowDelay: 0.6
   potatoHitDelay: 0.125
-  stunTime: 0.5
+  stunTime: 1.5
 --- !u!66 &1060143338
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -2103,20 +2103,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 656938014}
     m_ColliderPaths:
-    - - X: 14331743
+    - - X: 7676371
         Y: 13806622
-      - X: 14331743
+      - X: 7676371
         Y: 55992480
-      - X: -4407324
+      - X: -3042126
         Y: 55992451
-      - X: -4407295
+      - X: -3042097
         Y: 13806622
   m_CompositePaths:
     m_Paths:
-    - - {x: 1.4331744, y: 5.599248}
-      - {x: -0.44073242, y: 5.599245}
-      - {x: -0.4407295, y: 1.3806622}
-      - {x: 1.4331744, y: 1.3806622}
+    - - {x: 0.76763713, y: 5.599248}
+      - {x: -0.3042126, y: 5.599245}
+      - {x: -0.3042097, y: 1.3806622}
+      - {x: 0.76763713, y: 1.3806622}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.000005
 --- !u!50 &1060143339
