@@ -16,11 +16,18 @@ public class PlayerController : MonoBehaviour
     public Vector2 potatoDirection;
     public float potatoVerticalVariance = 45f;
     public float potatoForce;
+    public SpriteRenderer blush;
+    public SpriteRenderer blush2;
+    public int initialHealth = 10;
+    public int slapDamage = 2;
+    public int potatoDamage = 1;
+    public int vodkaHealth = 1;
 
     private Animator m_Animator;
     private float nextSlapTime = 0;
     private float nextVodkaTime = 0;
     private float nextPotatoTime = 0;
+    private int health;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +36,9 @@ public class PlayerController : MonoBehaviour
         Messenger.AddListener<PlayerController>(Events.OnSlap, Slapped);
         Messenger.AddListener<PlayerController>(Events.OnDrinkVodka, Vodkaed);
         Messenger.AddListener<PlayerController>(Events.OnThrowPotato, Potatoed);
+
+        SetBlushOpacity(0);
+        health = initialHealth;
     }
 
     void Slapped(PlayerController controller)
@@ -37,6 +47,7 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(SetTriggerDelay("Slapped", 0.25f));
             StartCoroutine(ScreenShake(0.25f));
+            StartCoroutine(TakeDamageDelay(slapDamage, 0.25f));
         }
     }
 
@@ -61,6 +72,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var blushOpacity = 1f - (float)health / (float)initialHealth;
+        SetBlushOpacity(blushOpacity);
+
         if (playerNumber == 1 && Input.GetButtonUp("Fire1") || playerNumber == 2 && Input.GetButtonUp("Fire4"))
         {
             if (Time.time > nextSlapTime)
@@ -69,7 +83,6 @@ public class PlayerController : MonoBehaviour
                 Messenger.Broadcast<PlayerController>(Events.OnSlap, enemyPlayer);
                 nextSlapTime = Time.time + slapCooldownTime;
             }
-            
         }
 
         if (playerNumber == 1 && Input.GetButtonUp("Fire2") || playerNumber == 2 && Input.GetButtonUp("Fire5"))
@@ -77,6 +90,7 @@ public class PlayerController : MonoBehaviour
             if (Time.time > nextVodkaTime)
             {
                 m_Animator.SetTrigger("Vodka");
+                Heal(vodkaHealth);
                 Messenger.Broadcast<PlayerController>(Events.OnDrinkVodka, enemyPlayer);
                 nextVodkaTime = Time.time + vodkaCooldownTime;
             }
@@ -117,11 +131,49 @@ public class PlayerController : MonoBehaviour
         m_Animator.SetTrigger(trigger);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         Messenger.Broadcast<PlayerController>(Events.OnPotatoHit, this);
         StartCoroutine(SetTriggerDelay("Slapped", 0));
         StartCoroutine(ScreenShake(0));
+        TakeDamage(potatoDamage);
+    }
+
+    void Heal(int amount)
+    {
+        health += amount;
+
+        if (health > initialHealth)
+        {
+            health = initialHealth;
+        }
+    }
+
+    IEnumerator TakeDamageDelay(int amount, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        TakeDamage(amount);
+    }
+
+    void TakeDamage(int amount)
+    {
+        health -= amount;
+
+        if (health < 0)
+        {
+            health = 0;
+        }
+
+        if (health == 0)
+        {
+            Messenger.Broadcast<PlayerController>(Events.GameOver, enemyPlayer);
+        }
+    }
+
+    void SetBlushOpacity(float opacity)
+    {
+        blush.color = new Color(blush.color.r, blush.color.g, blush.color.b, opacity);
+        blush2.color = new Color(blush2.color.r, blush2.color.g, blush2.color.b, opacity);
     }
 
     private void OnDestroy()

@@ -37,7 +37,8 @@ public enum Events
 	OnSlap,
 	OnThrowPotato,
     OnPotatoHit,
-    OnDrinkVodka
+    OnDrinkVodka,
+    GameOver
 }
 
 static internal class Messenger
