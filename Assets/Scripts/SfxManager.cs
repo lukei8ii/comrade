@@ -32,10 +32,13 @@ public class SfxManager : MonoBehaviour
     {
 		m_AudioSource = GetComponent<AudioSource>();
 
+        Messenger.AddListener<PlayerController>(Events.OnSlap, Whoosh);
         Messenger.AddListener<PlayerController>(Events.OnSlapHit, Slapped);
         Messenger.AddListener<PlayerController>(Events.OnSlapSlapped, PotatoHit);
-        Messenger.AddListener<PlayerController>(Events.OnVodkaHit, Vodkaed);
-        Messenger.AddListener<PlayerController>(Events.OnThrowPotato, PotatoThrown);
+        Messenger.AddListener<GameObject>(Events.OnPotatoCollide, PotatoCollide);
+        Messenger.AddListener<PlayerController>(Events.OnDrinkVodka, Drink);
+        Messenger.AddListener<PlayerController>(Events.OnVodkaDeflected, GlassBreak);
+        Messenger.AddListener<PlayerController>(Events.OnThrowPotato, Whoosh);
         Messenger.AddListener<PlayerController>(Events.OnPotatoHit, PotatoHit);
         Messenger.AddListener<PlayerController>(Events.OnGlassDown, GlassDown);
     }
@@ -45,22 +48,32 @@ public class SfxManager : MonoBehaviour
         Play(Clip.GlassDown);
     }
 
+    private void GlassBreak(PlayerController controller)
+    {
+        Play(Clip.GlassBreak);
+    }
+
     void Slapped(PlayerController controller)
     {
         Play(Clip.Slap);
     }
 
-    private void Vodkaed(PlayerController controller)
+    private void Drink(PlayerController controller)
     {
         Play(Clip.Drink);
     }
 
-    private void PotatoThrown(PlayerController controller)
+    private void Whoosh(PlayerController controller)
     {
         Play(Clip.Woosh);
     }
 
     private void PotatoHit(PlayerController controller)
+    {
+        Play(Clip.PotatoHit);
+    }
+
+    private void PotatoCollide(GameObject potato)
     {
         Play(Clip.PotatoHit);
     }
@@ -114,10 +127,13 @@ public class SfxManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        Messenger.RemoveListener<PlayerController>(Events.OnSlap, Whoosh);
         Messenger.RemoveListener<PlayerController>(Events.OnSlapHit, Slapped);
         Messenger.RemoveListener<PlayerController>(Events.OnSlapSlapped, PotatoHit);
-        Messenger.RemoveListener<PlayerController>(Events.OnVodkaHit, Vodkaed);
-        Messenger.RemoveListener<PlayerController>(Events.OnThrowPotato, PotatoThrown);
+        Messenger.RemoveListener<GameObject>(Events.OnPotatoCollide, PotatoCollide);
+        Messenger.RemoveListener<PlayerController>(Events.OnDrinkVodka, Drink);
+        Messenger.RemoveListener<PlayerController>(Events.OnVodkaDeflected, GlassBreak);
+        Messenger.RemoveListener<PlayerController>(Events.OnThrowPotato, Whoosh);
         Messenger.RemoveListener<PlayerController>(Events.OnPotatoHit, PotatoHit);
         Messenger.RemoveListener<PlayerController>(Events.OnGlassDown, GlassDown);
     }

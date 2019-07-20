@@ -43,6 +43,7 @@ public enum Events
     OnPotatoTry,
     OnPotatoHit,
     OnPotatoDeflected,
+    OnPotatoCollide,
     OnDrinkVodka,
     OnVodkaTry,
     OnVodkaHit,

@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour
     {
         m_Animator = GetComponent<Animator>();
         Messenger.AddListener<PlayerController>(Events.OnSlapTry, HandleEnemySlapping);
-        Messenger.AddListener<PlayerController>(Events.OnVodkaTry, HandleEnemyDrinking);
-        Messenger.AddListener<PlayerController>(Events.OnVodkaDeflected, DrinkSpilled);
+        //Messenger.AddListener<PlayerController>(Events.OnVodkaTry, HandleEnemyDrinking);
+        //Messenger.AddListener<PlayerController>(Events.OnVodkaDeflected, DrinkSpilled);
         Messenger.AddListener<PlayerController>(Events.OnStunned, SlapMissed);
         Messenger.AddListener<PlayerController>(Events.OnGameOver, GameOver);
 
@@ -71,36 +71,36 @@ public class PlayerController : MonoBehaviour
         m_NextActionTime = Time.time;
     }
 
-    private void DrinkSpilled(PlayerController controller)
-    {
-        if (controller == this)
-        {
-            StartCoroutine(DrinkingStun(stunTime));
-        }
-    }
+    //private void DrinkSpilled(PlayerController controller)
+    //{
+    //    if (controller == this)
+    //    {
+    //        StartCoroutine(DrinkingStun(stunTime));
+    //    }
+    //}
 
-    private void HandleEnemyDrinking(PlayerController controller)
-    {
-        if (controller == this)
-        {
-            switch (m_State)
-            {
-                case State.Drinking:
-                    // Both enjoy their drinks
-                    break;
-                case State.Throwing:
-                    // Let enemy know they don't get to drink their vodka
-                    Messenger.Broadcast<PlayerController>(Events.OnVodkaDeflected, enemyPlayer);
-                    break;
-                case State.Slapping:
-                    // Handled in HandleEnemySlapping
-                    break;
-                case State.Idle:
-                    // Watch them drink
-                    break;
-            }
-        }
-    }
+    //private void HandleEnemyDrinking(PlayerController controller)
+    //{
+    //    if (controller == this)
+    //    {
+    //        switch (m_State)
+    //        {
+    //            case State.Drinking:
+    //                // Both enjoy their drinks
+    //                break;
+    //            case State.Throwing:
+    //                // Let enemy know they don't get to drink their vodka
+    //                Messenger.Broadcast<PlayerController>(Events.OnVodkaDeflected, enemyPlayer);
+    //                break;
+    //            case State.Slapping:
+    //                // Handled in HandleEnemySlapping
+    //                break;
+    //            case State.Idle:
+    //                // Watch them drink
+    //                break;
+    //        }
+    //    }
+    //}
 
     void HandleEnemySlapping(PlayerController controller)
     {
@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour
         if (m_State != State.Stunned)
             SetState(State.Idle);
 
-        Messenger.Broadcast<PlayerController>(Events.OnVodkaHit, this);
+        Messenger.Broadcast<PlayerController>(Events.OnVodkaTry, this);
         Heal(vodkaHealth);
 
         yield return null;
@@ -262,12 +262,9 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator DrinkingStun(float seconds)
     {
-        m_Animator.SetBool("Stunned", true);
-        SetState(State.Stunned);
-        yield return new WaitForSeconds(seconds / 2f);
-        m_Animator.SetBool("Stunned", false);
         m_Animator.SetTrigger("Vodkaed");
-        yield return new WaitForSeconds(seconds / 2f);
+        SetState(State.Stunned);
+        yield return new WaitForSeconds(seconds);
         SetState(State.Idle);
         
         yield return null;
@@ -321,12 +318,19 @@ public class PlayerController : MonoBehaviour
             collision.rigidbody != m_ThrownPotato.Potato ||
             m_ThrownPotato.Owner == enemyPlayer)
         {
-            Messenger.Broadcast<PlayerController>(Events.OnPotatoHit, this);
-            m_Animator.SetTrigger("Slapped");
-            ScreenShake();
-            TakeDamage(potatoDamage);
+            if (m_State == State.Drinking)
+            {
+                Messenger.Broadcast<PlayerController>(Events.OnVodkaDeflected, this);
+                StartCoroutine(DrinkingStun(stunTime));
+            } else
+            {
+                m_Animator.SetTrigger("Slapped");
+                TakeDamage(potatoDamage);
+                SetState(State.Idle);
+            }
 
-            SetState(State.Idle);
+            ScreenShake();
+            Messenger.Broadcast<PlayerController>(Events.OnPotatoHit, this);
         }
     }
 
