@@ -1041,10 +1041,10 @@ MonoBehaviour:
   slapDamage: 2
   potatoDamage: 3
   vodkaHealth: 2
-  slapHitDelay: 0.25
-  drinkHitDelay: 0.25
-  potatoThrowDelay: 0.6
-  potatoHitDelay: 0.125
+  slapHitDelay: 0.5
+  drinkHitDelay: 0.5
+  potatoThrowDelay: 0.5
+  potatoHitDelay: 0.25
   stunTime: 1.5
 --- !u!66 &540504716
 CompositeCollider2D:
@@ -2078,10 +2078,10 @@ MonoBehaviour:
   slapDamage: 2
   potatoDamage: 3
   vodkaHealth: 2
-  slapHitDelay: 0.25
-  drinkHitDelay: 0.25
-  potatoThrowDelay: 0.6
-  potatoHitDelay: 0.125
+  slapHitDelay: 0.5
+  drinkHitDelay: 0.5
+  potatoThrowDelay: 0.5
+  potatoHitDelay: 0.25
   stunTime: 1.5
 --- !u!66 &1060143338
 CompositeCollider2D:
@@ -2103,20 +2103,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 656938014}
     m_ColliderPaths:
-    - - X: 7676376
+    - - X: 7676371
         Y: 13806622
-      - X: 7676376
+      - X: 7676371
         Y: 55992480
-      - X: -3042121
+      - X: -3042126
         Y: 55992451
-      - X: -3042092
+      - X: -3042097
         Y: 13806622
   m_CompositePaths:
     m_Paths:
-    - - {x: 0.7676376, y: 5.599248}
-      - {x: -0.3042121, y: 5.599245}
-      - {x: -0.3042092, y: 1.3806622}
-      - {x: 0.7676376, y: 1.3806622}
+    - - {x: 0.76763713, y: 5.599248}
+      - {x: -0.3042126, y: 5.599245}
+      - {x: -0.3042097, y: 1.3806622}
+      - {x: 0.76763713, y: 1.3806622}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.000005
 --- !u!50 &1060143339

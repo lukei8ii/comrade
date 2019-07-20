@@ -31,6 +31,8 @@ public class SfxManager : MonoBehaviour
 		m_AudioSource = GetComponent<AudioSource>();
 
         Messenger.AddListener<PlayerController>(Events.OnSlapHit, Slapped);
+        Messenger.AddListener<PlayerController>(Events.OnSlapSlapped, PotatoHit);
+
         Messenger.AddListener<PlayerController>(Events.OnVodkaHit, Vodkaed);
         Messenger.AddListener<PlayerController>(Events.OnThrowPotato, PotatoThrown);
         Messenger.AddListener<PlayerController>(Events.OnPotatoHit, PotatoHit);

@@ -59,7 +59,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         m_Animator = GetComponent<Animator>();
-        Messenger.AddListener<PlayerController>(Events.OnSlapHit, SlapHit);
+        Messenger.AddListener<PlayerController>(Events.OnSlapTry, SlapTry);
+        //Messenger.AddListener<PlayerController>(Events.OnSlapSlapped, SlapSlapped);
         Messenger.AddListener<PlayerController>(Events.OnStunned, Stunned);
         Messenger.AddListener<PlayerController>(Events.OnGameOver, GameOver);
 
@@ -69,7 +70,15 @@ public class PlayerController : MonoBehaviour
         m_NextActionTime = Time.time;
     }
 
-    void SlapHit(PlayerController controller)
+    //private void SlapSlapped(PlayerController controller)
+    //{
+    //    if (controller == this)
+    //    {
+    //        SetState(State.Idle);
+    //    }
+    //}
+
+    void SlapTry(PlayerController controller)
     {
         if (controller == this)
         {
@@ -85,13 +94,15 @@ public class PlayerController : MonoBehaviour
                     Messenger.Broadcast<PlayerController>(Events.OnPotatoDeflected, enemyPlayer);
                     break;
                 case State.Slapping:
-                    // Take damage
-                    m_Animator.SetTrigger("Slapped");
-                    ScreenShake();
-                    TakeDamage(slapDamage);
+                    Messenger.Broadcast<PlayerController>(Events.OnSlapSlapped, this);
+                    SetState(State.Idle);
+                    //m_Animator.SetTrigger("Slapped");
+                    //ScreenShake();
+                    //TakeDamage(slapDamage);
                     break;
                 case State.Idle:
                     // Take damage
+                    Messenger.Broadcast<PlayerController>(Events.OnSlapHit, this);
                     m_Animator.SetTrigger("Slapped");
                     ScreenShake();
                     TakeDamage(slapDamage);
@@ -162,10 +173,11 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(slapHitDelay);
 
-        if (m_State != State.Stunned)
+        if (m_State != State.Idle)
+        {
             SetState(State.Idle);
-
-        Messenger.Broadcast<PlayerController>(Events.OnSlapHit, enemyPlayer);
+            Messenger.Broadcast<PlayerController>(Events.OnSlapTry, enemyPlayer);
+        }
         
         yield return null;
     }
@@ -344,7 +356,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
-        Messenger.RemoveListener<PlayerController>(Events.OnSlapHit, SlapHit);
+        Messenger.RemoveListener<PlayerController>(Events.OnSlapTry, SlapTry);
         Messenger.RemoveListener<PlayerController>(Events.OnStunned, Stunned);
     }
 }

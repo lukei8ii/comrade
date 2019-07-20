@@ -35,12 +35,16 @@ using UnityEngine.SceneManagement;
 public enum Events
 {
 	OnSlap,
+    OnSlapTry,
     OnSlapHit,
     OnSlapDeflected,
+    OnSlapSlapped,
 	OnThrowPotato,
+    OnPotatoTry,
     OnPotatoHit,
     OnPotatoDeflected,
     OnDrinkVodka,
+    OnVodkaTry,
     OnVodkaHit,
     OnVodkaDeflected,
     OnStunned,
