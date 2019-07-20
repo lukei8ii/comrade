@@ -48,6 +48,7 @@ public enum Events
     OnVodkaHit,
     OnVodkaDeflected,
     OnStunned,
+    OnGlassDown,
     OnGameOver
 }
 

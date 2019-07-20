@@ -59,9 +59,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         m_Animator = GetComponent<Animator>();
-        Messenger.AddListener<PlayerController>(Events.OnSlapTry, SlapTry);
-        //Messenger.AddListener<PlayerController>(Events.OnSlapSlapped, SlapSlapped);
-        Messenger.AddListener<PlayerController>(Events.OnStunned, Stunned);
+        Messenger.AddListener<PlayerController>(Events.OnSlapTry, HandleEnemySlapping);
+        Messenger.AddListener<PlayerController>(Events.OnVodkaTry, HandleEnemyDrinking);
+        Messenger.AddListener<PlayerController>(Events.OnVodkaDeflected, DrinkSpilled);
+        Messenger.AddListener<PlayerController>(Events.OnStunned, SlapMissed);
         Messenger.AddListener<PlayerController>(Events.OnGameOver, GameOver);
 
         SetBlushOpacity(0);
@@ -70,15 +71,38 @@ public class PlayerController : MonoBehaviour
         m_NextActionTime = Time.time;
     }
 
-    //private void SlapSlapped(PlayerController controller)
-    //{
-    //    if (controller == this)
-    //    {
-    //        SetState(State.Idle);
-    //    }
-    //}
+    private void DrinkSpilled(PlayerController controller)
+    {
+        if (controller == this)
+        {
+            StartCoroutine(DrinkingStun(stunTime));
+        }
+    }
 
-    void SlapTry(PlayerController controller)
+    private void HandleEnemyDrinking(PlayerController controller)
+    {
+        if (controller == this)
+        {
+            switch (m_State)
+            {
+                case State.Drinking:
+                    // Both enjoy their drinks
+                    break;
+                case State.Throwing:
+                    // Let enemy know they don't get to drink their vodka
+                    Messenger.Broadcast<PlayerController>(Events.OnVodkaDeflected, enemyPlayer);
+                    break;
+                case State.Slapping:
+                    // Handled in HandleEnemySlapping
+                    break;
+                case State.Idle:
+                    // Watch them drink
+                    break;
+            }
+        }
+    }
+
+    void HandleEnemySlapping(PlayerController controller)
     {
         if (controller == this)
         {
@@ -94,11 +118,9 @@ public class PlayerController : MonoBehaviour
                     Messenger.Broadcast<PlayerController>(Events.OnPotatoDeflected, enemyPlayer);
                     break;
                 case State.Slapping:
+                    // Prevent damaging enemy, play thud sound
                     Messenger.Broadcast<PlayerController>(Events.OnSlapSlapped, this);
                     SetState(State.Idle);
-                    //m_Animator.SetTrigger("Slapped");
-                    //ScreenShake();
-                    //TakeDamage(slapDamage);
                     break;
                 case State.Idle:
                     // Take damage
@@ -111,11 +133,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Stunned(PlayerController controller)
+    void SlapMissed(PlayerController controller)
     {
         if (controller == this)
         {
-            StartCoroutine(Stun(stunTime));
+            StartCoroutine(SlappingStun(stunTime));
         }
     }
 
@@ -228,13 +250,26 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Stun(float seconds)
+    IEnumerator SlappingStun(float seconds)
     {
         m_Animator.SetBool("Stunned", true);
         SetState(State.Stunned);
         yield return new WaitForSeconds(seconds);
         SetState(State.Idle);
         m_Animator.SetBool("Stunned", false);
+        yield return null;
+    }
+
+    IEnumerator DrinkingStun(float seconds)
+    {
+        m_Animator.SetBool("Stunned", true);
+        SetState(State.Stunned);
+        yield return new WaitForSeconds(seconds / 2f);
+        m_Animator.SetBool("Stunned", false);
+        m_Animator.SetTrigger("Vodkaed");
+        yield return new WaitForSeconds(seconds / 2f);
+        SetState(State.Idle);
+        
         yield return null;
     }
 
@@ -354,9 +389,14 @@ public class PlayerController : MonoBehaviour
         blush2.color = new Color(blush2.color.r, blush2.color.g, blush2.color.b, opacity);
     }
 
+    public void BroadcastGlassDown()
+    {
+        Messenger.Broadcast<PlayerController>(Events.OnGlassDown, this);
+    }
+
     private void OnDestroy()
     {
-        Messenger.RemoveListener<PlayerController>(Events.OnSlapTry, SlapTry);
-        Messenger.RemoveListener<PlayerController>(Events.OnStunned, Stunned);
+        Messenger.RemoveListener<PlayerController>(Events.OnSlapTry, HandleEnemySlapping);
+        Messenger.RemoveListener<PlayerController>(Events.OnStunned, SlapMissed);
     }
 }

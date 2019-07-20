@@ -73,6 +73,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f32cf2e7abbca40139f84d8a0ca43672, type: 3}
   - {fileID: 8300000, guid: 828984c47de08451cbacf3dada66f5ac, type: 3}
   - {fileID: 8300000, guid: 97f899d7df2484d3bb457d790c6c9c36, type: 3}
+  putGlassDown: {fileID: 8300000, guid: 3b4fc5eae8ca246e598e59008a21a2df, type: 3}
 --- !u!82 &7442385032204476177
 AudioSource:
   m_ObjectHideFlags: 0

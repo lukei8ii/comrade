@@ -11,7 +11,8 @@ public class SfxManager : MonoBehaviour
         PassOut,
         Woosh,
         PotatoHit,
-        Slap
+        Slap,
+        GlassDown
     };
 
     public AudioClip[] burps;
@@ -22,6 +23,7 @@ public class SfxManager : MonoBehaviour
     public AudioClip[] wooshes;
     public AudioClip[] potatoHits;
     public AudioClip[] slaps;
+    public AudioClip putGlassDown;
 
 	private AudioSource m_AudioSource;
 
@@ -32,10 +34,15 @@ public class SfxManager : MonoBehaviour
 
         Messenger.AddListener<PlayerController>(Events.OnSlapHit, Slapped);
         Messenger.AddListener<PlayerController>(Events.OnSlapSlapped, PotatoHit);
-
         Messenger.AddListener<PlayerController>(Events.OnVodkaHit, Vodkaed);
         Messenger.AddListener<PlayerController>(Events.OnThrowPotato, PotatoThrown);
         Messenger.AddListener<PlayerController>(Events.OnPotatoHit, PotatoHit);
+        Messenger.AddListener<PlayerController>(Events.OnGlassDown, GlassDown);
+    }
+
+    private void GlassDown(PlayerController controller)
+    {
+        Play(Clip.GlassDown);
     }
 
     void Slapped(PlayerController controller)
@@ -86,6 +93,9 @@ public class SfxManager : MonoBehaviour
             case Clip.Slap:
                 PlayRandom(slaps);
                 break;
+            case Clip.GlassDown:
+                m_AudioSource.PlayOneShot(putGlassDown);
+                break;
             default:
                 break;
         }
@@ -105,8 +115,10 @@ public class SfxManager : MonoBehaviour
     private void OnDestroy()
     {
         Messenger.RemoveListener<PlayerController>(Events.OnSlapHit, Slapped);
+        Messenger.RemoveListener<PlayerController>(Events.OnSlapSlapped, PotatoHit);
         Messenger.RemoveListener<PlayerController>(Events.OnVodkaHit, Vodkaed);
         Messenger.RemoveListener<PlayerController>(Events.OnThrowPotato, PotatoThrown);
         Messenger.RemoveListener<PlayerController>(Events.OnPotatoHit, PotatoHit);
+        Messenger.RemoveListener<PlayerController>(Events.OnGlassDown, GlassDown);
     }
 }
