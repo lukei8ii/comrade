@@ -401,6 +401,7 @@ public class PlayerController : MonoBehaviour
 
         if (m_Health == 0)
         {
+            m_Animator.SetTrigger("Dead");
             Messenger.Broadcast<PlayerController>(Events.OnGameOver, enemyPlayer);
         }
 
@@ -438,6 +439,11 @@ public class PlayerController : MonoBehaviour
     public void BroadcastSlap()
     {
         Messenger.Broadcast<PlayerController>(Events.OnSlap, this);
+    }
+
+    public void BroadcastHitTable()
+    {
+        Messenger.Broadcast<PlayerController>(Events.OnHitTable, this);
     }
 
     private void OnDestroy()

@@ -13,7 +13,8 @@ public class SfxManager : MonoBehaviour
         PotatoHit,
         Slap,
         GlassDown,
-        Vomit
+        Vomit,
+        HitTable
     };
 
     public AudioClip[] burps;
@@ -26,6 +27,7 @@ public class SfxManager : MonoBehaviour
     public AudioClip[] slaps;
     public AudioClip putGlassDown;
     public AudioClip vomit;
+    public AudioClip hitTable;
 
 	private AudioSource m_AudioSource;
 
@@ -46,6 +48,12 @@ public class SfxManager : MonoBehaviour
         Messenger.AddListener<PlayerController>(Events.OnPotatoHit, PotatoHit);
         Messenger.AddListener<PlayerController>(Events.OnGlassDown, GlassDown);
         Messenger.AddListener<PlayerController>(Events.OnVomit, Vomit);
+        Messenger.AddListener<PlayerController>(Events.OnHitTable, HitTable);
+    }
+
+    private void HitTable(PlayerController controller)
+    {
+        Play(Clip.HitTable);
     }
 
     private void Vomit(PlayerController controller)
@@ -126,6 +134,9 @@ public class SfxManager : MonoBehaviour
                 break;
             case Clip.Vomit:
                 m_AudioSource.PlayOneShot(vomit);
+                break;
+            case Clip.HitTable:
+                m_AudioSource.PlayOneShot(hitTable);
                 break;
             default:
                 break;

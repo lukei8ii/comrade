@@ -51,6 +51,7 @@ public enum Events
     OnStunned,
     OnGlassDown,
     OnVomit,
+    OnHitTable,
     OnGameOver
 }
 
