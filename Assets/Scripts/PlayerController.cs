@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
     public float stunTime = 0.5f;
 
     public int drinksToVomit = 2;
+    public SpriteRenderer background;
+
+    public GameObject eyes;
+    public Sprite eyesNormal;
+    public Sprite eyesDamaged;
+    public Sprite eyesDead;
 
     Animator m_Animator;
     float m_NextActionTime;
@@ -126,8 +132,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var blushOpacity = 1f - (float)m_Health / (float)initialHealth;
+        var healthPercentage = (float)m_Health / (float)initialHealth;
+        var blushOpacity = 1f - healthPercentage;
         SetBlushOpacity(blushOpacity);
+
+        var eyesRenderer = eyes.GetComponent<SpriteRenderer>();
+
+        //if (healthPercentage < .4f)
+        //{
+        eyesRenderer.sprite = eyesDamaged;
+        //}
 
         if (m_State == State.Stunned || m_State == State.GameOver)
             return;
@@ -303,6 +317,8 @@ public class PlayerController : MonoBehaviour
     void ScreenShake()
     {
         Camera.main.DOShakePosition(0.5f, 0.25f, 10);
+        var alpha = background.color.a;
+        background.DOFade(0.25f, 0.075f).OnComplete(()=> background.DOFade(alpha, 0.075f));
     }
 
     IEnumerator SetTriggerDelay(string trigger, float delay)
@@ -337,7 +353,7 @@ public class PlayerController : MonoBehaviour
     void SetState(State state)
     {
         m_State = state;
-        Debug.Log($"{playerNumber} - {m_State}");
+        //Debug.Log($"{playerNumber} - {m_State}");
 
         switch (state)
         {
@@ -364,6 +380,8 @@ public class PlayerController : MonoBehaviour
         {
             m_Health = initialHealth;
         }
+
+        UpdateEyes();
     }
 
     IEnumerator TakeDamageDelay(int amount, float delay)
@@ -385,6 +403,25 @@ public class PlayerController : MonoBehaviour
         {
             Messenger.Broadcast<PlayerController>(Events.OnGameOver, enemyPlayer);
         }
+
+        UpdateEyes();
+    }
+
+    void UpdateEyes()
+    {
+        //var healthPercentage = (float)m_Health / (float)initialHealth;
+        //var eyesRenderer = eyes.GetComponent<SpriteRenderer>();
+
+        //if (healthPercentage >= .4f)
+        //{
+        //    eyesRenderer.sprite = eyesNormal;
+        //} else if (healthPercentage > 0)
+        //{
+        //    eyesRenderer.sprite = eyesDamaged;
+        //} else
+        //{
+        //    eyesRenderer.sprite = eyesDead;
+        //}
     }
 
     void SetBlushOpacity(float opacity)
