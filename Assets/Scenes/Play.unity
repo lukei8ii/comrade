@@ -187,7 +187,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: edfa7afbadb704c1d802f2703312a5d8, type: 3}
   m_Color: {r: 0.5471698, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -655,7 +655,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: edfa7afbadb704c1d802f2703312a5d8, type: 3}
   m_Color: {r: 0.5471698, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -1046,6 +1046,7 @@ MonoBehaviour:
   potatoThrowDelay: 0.5
   potatoHitDelay: 0.25
   stunTime: 1.5
+  drinksToVomit: 3
 --- !u!70 &540504716
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1059,8 +1060,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.66758776, y: 3.921928}
-  m_Size: {x: 0.3604992, y: 4.778763}
+  m_Offset: {x: 0.66758776, y: 3.5845044}
+  m_Size: {x: 0.3604992, y: 5.453616}
   m_Direction: 0
 --- !u!50 &540504717
 Rigidbody2D:
@@ -2029,8 +2030,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 2
-  slapCooldownTime: 1
-  vodkaCooldownTime: 1
+  slapCooldownTime: 1.5
+  vodkaCooldownTime: 1.5
   potatoCooldownTime: 1.5
   enemyPlayer: {fileID: 540504715}
   potatoPrefab: {fileID: 458799138539036035, guid: e0588d6e6322448cfa5abdb3149c23b3,
@@ -2050,6 +2051,7 @@ MonoBehaviour:
   potatoThrowDelay: 0.5
   potatoHitDelay: 0.25
   stunTime: 1.5
+  drinksToVomit: 3
 --- !u!70 &1060143338
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2063,8 +2065,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.012497285, y: 4.499008}
-  m_Size: {x: 0.47500545, y: 4.0993214}
+  m_Offset: {x: -0.049989045, y: 3.9491315}
+  m_Size: {x: 0.40002203, y: 5.1990805}
   m_Direction: 0
 --- !u!50 &1060143339
 Rigidbody2D:
@@ -3200,6 +3202,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7442385032204476206, guid: 61199273d16834dbd8ee2ced8d33e6f9,
+        type: 3}
+      propertyPath: vomit
+      value: 
+      objectReference: {fileID: 8300000, guid: 6a2c975bfc7c9437a9c4f4160ca58ff1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61199273d16834dbd8ee2ced8d33e6f9, type: 3}
 --- !u!1 &1489904385

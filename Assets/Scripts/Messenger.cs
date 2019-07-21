@@ -50,6 +50,7 @@ public enum Events
     OnVodkaDeflected,
     OnStunned,
     OnGlassDown,
+    OnVomit,
     OnGameOver
 }
 

@@ -12,7 +12,8 @@ public class SfxManager : MonoBehaviour
         Woosh,
         PotatoHit,
         Slap,
-        GlassDown
+        GlassDown,
+        Vomit
     };
 
     public AudioClip[] burps;
@@ -24,6 +25,7 @@ public class SfxManager : MonoBehaviour
     public AudioClip[] potatoHits;
     public AudioClip[] slaps;
     public AudioClip putGlassDown;
+    public AudioClip vomit;
 
 	private AudioSource m_AudioSource;
 
@@ -35,12 +37,20 @@ public class SfxManager : MonoBehaviour
         Messenger.AddListener<PlayerController>(Events.OnSlap, Whoosh);
         Messenger.AddListener<PlayerController>(Events.OnSlapHit, Slapped);
         Messenger.AddListener<PlayerController>(Events.OnSlapSlapped, PotatoHit);
+        Messenger.AddListener<PlayerController>(Events.OnPotatoDeflected, PotatoHit);
         Messenger.AddListener<GameObject>(Events.OnPotatoCollide, PotatoCollide);
         Messenger.AddListener<PlayerController>(Events.OnDrinkVodka, Drink);
+        Messenger.AddListener<PlayerController>(Events.OnVodkaHit, Burp);
         Messenger.AddListener<PlayerController>(Events.OnVodkaDeflected, GlassBreak);
         Messenger.AddListener<PlayerController>(Events.OnThrowPotato, Whoosh);
         Messenger.AddListener<PlayerController>(Events.OnPotatoHit, PotatoHit);
         Messenger.AddListener<PlayerController>(Events.OnGlassDown, GlassDown);
+        Messenger.AddListener<PlayerController>(Events.OnVomit, Vomit);
+    }
+
+    private void Vomit(PlayerController controller)
+    {
+        Play(Clip.Vomit);
     }
 
     private void GlassDown(PlayerController controller)
@@ -61,6 +71,11 @@ public class SfxManager : MonoBehaviour
     private void Drink(PlayerController controller)
     {
         Play(Clip.Drink);
+    }
+
+    private void Burp(PlayerController controller)
+    {
+        Play(Clip.Burp);
     }
 
     private void Whoosh(PlayerController controller)
@@ -109,6 +124,9 @@ public class SfxManager : MonoBehaviour
             case Clip.GlassDown:
                 m_AudioSource.PlayOneShot(putGlassDown);
                 break;
+            case Clip.Vomit:
+                m_AudioSource.PlayOneShot(vomit);
+                break;
             default:
                 break;
         }
@@ -130,8 +148,10 @@ public class SfxManager : MonoBehaviour
         Messenger.RemoveListener<PlayerController>(Events.OnSlap, Whoosh);
         Messenger.RemoveListener<PlayerController>(Events.OnSlapHit, Slapped);
         Messenger.RemoveListener<PlayerController>(Events.OnSlapSlapped, PotatoHit);
+        Messenger.RemoveListener<PlayerController>(Events.OnPotatoDeflected, PotatoHit);
         Messenger.RemoveListener<GameObject>(Events.OnPotatoCollide, PotatoCollide);
         Messenger.RemoveListener<PlayerController>(Events.OnDrinkVodka, Drink);
+        Messenger.RemoveListener<PlayerController>(Events.OnVodkaHit, Burp);
         Messenger.RemoveListener<PlayerController>(Events.OnVodkaDeflected, GlassBreak);
         Messenger.RemoveListener<PlayerController>(Events.OnThrowPotato, Whoosh);
         Messenger.RemoveListener<PlayerController>(Events.OnPotatoHit, PotatoHit);
