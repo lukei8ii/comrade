@@ -167,5 +167,7 @@ public class SfxManager : MonoBehaviour
         Messenger.RemoveListener<PlayerController>(Events.OnThrowPotato, Whoosh);
         Messenger.RemoveListener<PlayerController>(Events.OnPotatoHit, PotatoHit);
         Messenger.RemoveListener<PlayerController>(Events.OnGlassDown, GlassDown);
+        Messenger.RemoveListener<PlayerController>(Events.OnVomit, Vomit);
+        Messenger.RemoveListener<PlayerController>(Events.OnHitTable, HitTable);
     }
 }
