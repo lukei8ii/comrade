@@ -1345,8 +1345,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
-  slapCooldownTime: 1
-  vodkaCooldownTime: 1
+  slapCooldownTime: 1.5
+  vodkaCooldownTime: 1.5
   potatoCooldownTime: 1.5
   enemyPlayer: {fileID: 1060143337}
   potatoPrefab: {fileID: 458799138539036035, guid: e0588d6e6322448cfa5abdb3149c23b3,
