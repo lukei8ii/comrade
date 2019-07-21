@@ -266,6 +266,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator SlappingStun(float seconds)
     {
         m_Animator.SetBool("Stunned", true);
+        Messenger.Broadcast<PlayerController>(Events.OnSlapDeflected, this);
 
         yield return new WaitForSeconds(seconds);
 
