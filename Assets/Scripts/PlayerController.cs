@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
                     Messenger.Broadcast<PlayerController>(Events.OnSlapSlapped, this);
                     SetState(State.Idle);
                     break;
+                case State.Stunned:
                 case State.Throwing:
                 case State.Idle:
                     // Take damage

@@ -225,8 +225,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 69779
-      y: -55041
+      x: 72469
+      y: -57221
       width: 656
       height: 536
     spriteID: e58f0d042323546bbb71124ca4abaaca
@@ -286,7 +286,7 @@ ScriptedImporter:
     uvTransform: {x: -1079, y: -12}
   - name: Head 1 Eyes Open
     originalName: 
-    pivot: {x: 0.5300879, y: 0.64279944}
+    pivot: {x: 0.52498835, y: 0.64279944}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -374,7 +374,7 @@ ScriptedImporter:
     uvTransform: {x: -325, y: 2571}
   - name: Head1 Almost Dead
     originalName: 
-    pivot: {x: 0.49850076, y: 0.58443165}
+    pivot: {x: 0.49110973, y: 0.5844323}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
