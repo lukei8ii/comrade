@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public float vodkaCooldownTime = 1f;
     public float potatoCooldownTime = 1f;
     public PlayerController enemyPlayer;
+
     public GameObject potatoPrefab;
     public Transform potatoSpawn;
     public Vector2 potatoDirection;
@@ -82,6 +83,11 @@ public class PlayerController : MonoBehaviour
         SetState(State.Idle);
         m_NextActionTime = Time.time;
         m_InitialBackgroundAlpha = background.color.a;
+    }
+
+    public float HealthPercentage()
+    {
+        return (float)m_Health / (float)initialHealth;
     }
 
     void HandleEnemySlapping(PlayerController controller)
@@ -140,7 +146,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var healthPercentage = (float)m_Health / (float)initialHealth;
+        var healthPercentage = HealthPercentage();
         var blushOpacity = 1f - healthPercentage;
         SetBlushOpacity(blushOpacity);
 
@@ -390,6 +396,7 @@ public class PlayerController : MonoBehaviour
         }
 
         UpdateEyes();
+        Messenger.Broadcast<PlayerController>(Events.HealthAdjusted, this);
     }
 
     IEnumerator TakeDamageDelay(int amount, float delay)
@@ -414,11 +421,12 @@ public class PlayerController : MonoBehaviour
         }
 
         UpdateEyes();
+        Messenger.Broadcast<PlayerController>(Events.HealthAdjusted, this);
     }
 
     void UpdateEyes()
     {
-        var healthPercentage = (float)m_Health / (float)initialHealth;
+        var healthPercentage = HealthPercentage();
         var eyesRenderer = eyes.GetComponent<SpriteRenderer>();
 
         if (healthPercentage >= .4f)

@@ -20,7 +20,12 @@ public class GameStateManager : MonoBehaviour
 
     void GameOver(PlayerController controller)
     {
-        gameOverText.text = $"Player {controller.playerNumber} Wins!";
+        var playerName = "Dimitri";
+
+        if (controller.playerNumber == 2)
+            playerName = "Viktor";
+
+        gameOverText.text = $"{playerName} Wins!";
         gameOverCanvas.DOFade(1f, 1f);
     }
 

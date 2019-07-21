@@ -52,7 +52,8 @@ public enum Events
     OnGlassDown,
     OnVomit,
     OnHitTable,
-    OnGameOver
+    OnGameOver,
+    HealthAdjusted
 }
 
 static internal class Messenger
