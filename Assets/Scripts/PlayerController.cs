@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
         //Messenger.AddListener<PlayerController>(Events.OnVodkaDeflected, DrinkSpilled);
         Messenger.AddListener<PlayerController>(Events.OnStunned, SlapMissed);
         Messenger.AddListener<PlayerController>(Events.OnGameOver, GameOver);
+        Messenger.AddListener<PlayerController>(Events.OnDraw, Draw);
 
         SetBlushOpacity(0);
         m_Health = initialHealth;
@@ -141,6 +142,11 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetTrigger("Win");
         }
+    }
+
+    void Draw(PlayerController controller)
+    {
+        SetState(State.GameOver);
     }
 
     // Update is called once per frame
@@ -468,5 +474,6 @@ public class PlayerController : MonoBehaviour
     {
         Messenger.RemoveListener<PlayerController>(Events.OnSlapTry, HandleEnemySlapping);
         Messenger.RemoveListener<PlayerController>(Events.OnStunned, SlapMissed);
+        Messenger.RemoveListener<PlayerController>(Events.OnDraw, Draw);
     }
 }
