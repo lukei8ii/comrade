@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,13 @@ public class Timer : MonoBehaviour
     {
         StartCoroutine("LoseTime");
         Time.timeScale = 1; //Just making sure that the timeScale is right
+        Messenger.AddListener<PlayerController>(Events.OnGameOver, PlayerLost);
+    }
+
+    private void PlayerLost(PlayerController controller)
+    {
+        //keepCounting = false;
+        StopCoroutine("LoseTime");
     }
 
     void Update()
@@ -33,5 +41,10 @@ public class Timer : MonoBehaviour
             if (!keepCounting)
                 Messenger.Broadcast<Timer>(Events.OnTimeout, this);
         }
+    }
+
+    private void OnDestroy()
+    {
+        Messenger.RemoveListener<PlayerController>(Events.OnGameOver, PlayerLost);
     }
 }

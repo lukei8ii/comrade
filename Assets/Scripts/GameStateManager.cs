@@ -10,8 +10,6 @@ public class GameStateManager : MonoBehaviour
     public PlayerController player1;
     public PlayerController player2;
 
-    int m_JoystickCount = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -19,21 +17,6 @@ public class GameStateManager : MonoBehaviour
 
         Messenger.AddListener<PlayerController>(Events.OnGameOver, GameOver);
         Messenger.AddListener<Timer>(Events.OnTimeout, Timeout);
-    }
-
-    void Update()
-    {
-        var joystickCount = Input.GetJoystickNames().Length;
-        if (joystickCount != m_JoystickCount)
-        {
-            m_JoystickCount = joystickCount;
-            Debug.Log($"{joystickCount} Joysticks currently connected");
-        }
-    }
-
-    public bool IsJoystickConnected()
-    {
-        return m_JoystickCount > 0;
     }
 
     void GameOver(PlayerController controller)

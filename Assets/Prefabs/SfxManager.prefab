@@ -110,6 +110,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 38a2d58401ae941c9934f7f119a5cd01, type: 3}
   win1: {fileID: 8300000, guid: b598a5e1687df4b5fb9f0d174cd68a3c, type: 3}
   win2: {fileID: 8300000, guid: 257386d26e4f74cba8b89283963937f3, type: 3}
+  slam: {fileID: 8300000, guid: 6836a1722fe564cdaafa20fdeba74d26, type: 3}
 --- !u!82 &7442385032204476177
 AudioSource:
   m_ObjectHideFlags: 0

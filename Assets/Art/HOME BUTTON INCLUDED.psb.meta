@@ -1,0 +1,401 @@
+fileFormatVersion: 2
+guid: 27ec5d6dddce445f1a894877eadc4123
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: circle copy 3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 30379
+      y: -28038
+      width: 214
+      height: 214
+    spriteID: 25fa71781a9024ba4a2fab0ea8b03130
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 4}
+  - name: HOME
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1219
+      y: 1250
+      width: 137
+      height: 38
+    spriteID: c0c8dc8cd616f4feab9fcf83b7159312
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1219, y: 1250}
+  - name: BUTTON X
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1500
+      y: 1212
+      width: 180
+      height: 30
+    spriteID: fb555d3f884a14c73bd12797f0bcc2fa
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1088, y: 1049}
+  - name: 'Dimitri: PRESS A Viktor: PRESS J  '
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 226
+      y: 1212
+      width: 323
+      height: 91
+    spriteID: 00cbcf330e7a84f199443255bd619e3d
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -102, y: 1119}
+  - name: POTATO KEYBOARD COPY
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 557
+      y: 1212
+      width: 323
+      height: 80
+    spriteID: 28dc9813dbbeb452e9955fb7b11abc06
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -683, y: 1110}
+  - name: POTATO CONTROLLER COPY
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1688
+      y: 1212
+      width: 180
+      height: 30
+    spriteID: d84daac2a46854aa6aeec7975fae47ea
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 375, y: 1048}
+  - name: VODKA CONTROLLER COPY
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1219
+      y: 1212
+      width: 273
+      height: 30
+    spriteID: 78d715e66107f477b9dec4a1696d191b
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 378, y: 1048}
+  - name: VODKA KEYBOARD COPY
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 888
+      y: 1212
+      width: 323
+      height: 80
+    spriteID: c81288495c23842639f482fcde05e454
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 96, y: 1115}
+  - name: Layer 2 copy
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 1920
+      height: 1200
+    spriteID: a04cc06f643a34507a8adca55844e98e
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 4}
+  - name: HOME BUTTON INCLUDED_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1
+      y: 1208
+      width: 220
+      height: 223
+    spriteID: 74b585ae676254378b008b9dbb32fc2c
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1, y: 1208}
+  platformSettings: []
+  mosaicLayers: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 2048
+  importedTextureHeight: 2048
+  documentSize: {x: 1920, y: 1200}
+  textureActualWidth: 2048
+  textureActualHeight: 2048
+  spritePackingTag: 
+  resliceFromLayer: 0
+  characterMode: 1
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Group
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 00000000000000000000000000000000
+    layerID: -71659993
+    mosaicPosition: {x: 0, y: 0}
+  - name: circle copy 3
+    spriteName: circle copy 3
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 25fa71781a9024ba4a2fab0ea8b03130
+    layerID: 0
+    mosaicPosition: {x: 4, y: 1212}
+  - name: HOME
+    spriteName: circle copy 3
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 25fa71781a9024ba4a2fab0ea8b03130
+    layerID: 0
+    mosaicPosition: {x: 1219, y: 1250}
+  - name: BUTTON X
+    spriteName: BUTTON X
+    isGroup: 0
+    parentIndex: -1
+    spriteID: fb555d3f884a14c73bd12797f0bcc2fa
+    layerID: 1135594134
+    mosaicPosition: {x: 1500, y: 1212}
+  - name: 'Dimitri: PRESS A Viktor: PRESS J  '
+    spriteName: 'Dimitri: PRESS A Viktor: PRESS J  '
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 00cbcf330e7a84f199443255bd619e3d
+    layerID: -896331292
+    mosaicPosition: {x: 226, y: 1212}
+  - name: POTATO KEYBOARD COPY
+    spriteName: POTATO KEYBOARD COPY
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 28dc9813dbbeb452e9955fb7b11abc06
+    layerID: 2045127765
+    mosaicPosition: {x: 557, y: 1212}
+  - name: POTATO CONTROLLER COPY
+    spriteName: POTATO CONTROLLER COPY
+    isGroup: 0
+    parentIndex: -1
+    spriteID: d84daac2a46854aa6aeec7975fae47ea
+    layerID: 1704477632
+    mosaicPosition: {x: 1688, y: 1212}
+  - name: VODKA CONTROLLER COPY
+    spriteName: VODKA CONTROLLER COPY
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 78d715e66107f477b9dec4a1696d191b
+    layerID: -1232911794
+    mosaicPosition: {x: 1219, y: 1212}
+  - name: VODKA KEYBOARD COPY
+    spriteName: VODKA KEYBOARD COPY
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c81288495c23842639f482fcde05e454
+    layerID: 1407570847
+    mosaicPosition: {x: 888, y: 1212}
+  - name: Layer 2 copy
+    spriteName: circle copy 3
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 25fa71781a9024ba4a2fab0ea8b03130
+    layerID: 0
+    mosaicPosition: {x: 4, y: 4}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+  boneGOs: []
+  generateGOHierarchy: 0
+  textureAssetName: HOME BUTTON INCLUDED
+  prefabAssetName: HOME BUTTON INCLUDED_GO

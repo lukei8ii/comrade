@@ -55,7 +55,8 @@ public enum Events
     OnGameOver,
     HealthAdjusted,
     OnTimeout,
-    OnDraw
+    OnDraw,
+    OnSlam
 }
 
 static internal class Messenger

@@ -5217,7 +5217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7411765}
+  m_Color: {r: 0.8784314, g: 0.24313726, b: 0.12941177, a: 0.7411765}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5644,28 +5644,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &295085761 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1149107775649738655, guid: c9185eb370e3a406b9893a833c710d8a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1173553284}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &295085762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295085761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77547528386e4464c89ee3b96e161953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameOverCanvas: {fileID: 140113487}
-  gameOverText: {fileID: 252463467}
-  player1: {fileID: 540504715}
-  player2: {fileID: 1060143337}
 --- !u!1 &349134513
 GameObject:
   m_ObjectHideFlags: 0
@@ -6472,7 +6450,7 @@ MonoBehaviour:
   potatoForce: 900
   blush: {fileID: 1214943685}
   blush2: {fileID: 204056678}
-  initialHealth: 10
+  initialHealth: 15
   slapDamage: 2
   potatoDamage: 2
   vodkaHealth: 2
@@ -8201,7 +8179,7 @@ MonoBehaviour:
   potatoForce: 900
   blush: {fileID: 119279634}
   blush2: {fileID: 257861665}
-  initialHealth: 10
+  initialHealth: 15
   slapDamage: 2
   potatoDamage: 2
   vodkaHealth: 2
@@ -13301,6 +13279,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 295085762, guid: c9185eb370e3a406b9893a833c710d8a, type: 3}
+      propertyPath: gameOverCanvas
+      value: 
+      objectReference: {fileID: 140113487}
+    - target: {fileID: 295085762, guid: c9185eb370e3a406b9893a833c710d8a, type: 3}
+      propertyPath: gameOverText
+      value: 
+      objectReference: {fileID: 252463467}
+    - target: {fileID: 295085762, guid: c9185eb370e3a406b9893a833c710d8a, type: 3}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 540504715}
+    - target: {fileID: 295085762, guid: c9185eb370e3a406b9893a833c710d8a, type: 3}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 1060143337}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9185eb370e3a406b9893a833c710d8a, type: 3}
 --- !u!1 &1173620010
@@ -14344,6 +14338,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7442385032204476206, guid: 61199273d16834dbd8ee2ced8d33e6f9,
+        type: 3}
+      propertyPath: bell
+      value: 
+      objectReference: {fileID: 8300000, guid: 158ed832351a545bc909aa7f42d2d58a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61199273d16834dbd8ee2ced8d33e6f9, type: 3}
 --- !u!1 &1489904385
@@ -14941,7 +14940,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1173553284}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295085761}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9e8d93b1e4fe4c4ea324dbb58862575, type: 3}

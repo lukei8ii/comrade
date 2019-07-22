@@ -19,7 +19,9 @@ public class SfxManager : MonoBehaviour
         Ow,
         Curse,
         Laugh,
-        Win
+        Win,
+        Slam,
+        Bell
     };
 
     public AudioClip[] burps;
@@ -49,6 +51,10 @@ public class SfxManager : MonoBehaviour
     public AudioClip win1;
     public AudioClip win2;
 
+    public AudioClip slam;
+
+    public AudioClip bell;
+
     private AudioSource m_AudioSource;
 
 	// Use this for initialization
@@ -71,13 +77,21 @@ public class SfxManager : MonoBehaviour
         Messenger.AddListener<PlayerController>(Events.OnHitTable, HitTable);
         Messenger.AddListener<PlayerController>(Events.OnSlapDeflected, Angry);
         Messenger.AddListener<PlayerController>(Events.OnGameOver, Win);
+        Messenger.AddListener<GameObject>(Events.OnSlam, Slam);
+    }
+
+    private void Slam(GameObject hand)
+    {
+        Play(Clip.Slam);
     }
 
     private void Win(PlayerController controller)
     {
-        Play(Clip.Win, controller.playerNumber, 1.75f);
-        Play(Clip.Laugh, controller.playerNumber, 3f);
-        Play(Clip.Laugh, controller.playerNumber, 5.1f);
+        Play(Clip.Bell);
+        Play(Clip.Win, controller.playerNumber, 1.5f);
+        Play(Clip.Laugh, controller.playerNumber, 2f, 2);
+        Play(Clip.Laugh, controller.playerNumber, 3.5f, 0);
+        Play(Clip.Laugh, controller.playerNumber, 5f, 1);
     }
 
     private void Angry(PlayerController controller)
@@ -150,7 +164,7 @@ public class SfxManager : MonoBehaviour
         Play(Clip.PotatoHit);
     }
 
-    public void Play(Clip clip, int playerNumber=1, float delay=0f)
+    public void Play(Clip clip, int playerNumber=1, float delay=0f, int clipIndex=-1)
     {
         switch (clip)
         {
@@ -197,13 +211,22 @@ public class SfxManager : MonoBehaviour
                 PlayRandomPlayerEffects(playerNumber, curse1, curse2, delay);
                 break;
             case Clip.Laugh:
-                PlayRandomPlayerEffects(playerNumber, laugh1, laugh2, delay);
+                if (clipIndex > -1)
+                    PlayPlayerEffects(playerNumber, laugh1[clipIndex], laugh2[clipIndex], delay);
+                else
+                    PlayRandomPlayerEffects(playerNumber, laugh1, laugh2, delay);
                 break;
             case Clip.Win:
                 if (playerNumber == 1)
                     m_AudioSource.PlayOneShot(win1);
                 else
                     m_AudioSource.PlayOneShot(win2);
+                break;
+            case Clip.Slam:
+                m_AudioSource.PlayOneShot(slam);
+                break;
+            case Clip.Bell:
+                m_AudioSource.PlayOneShot(bell);
                 break;
             default:
                 break;
@@ -221,6 +244,18 @@ public class SfxManager : MonoBehaviour
         }
     }
 
+    void PlayPlayerEffects(int playerNumber, AudioClip player1, AudioClip player2, float delay)
+    {
+        if (playerNumber == 1)
+        {
+            StartCoroutine(PlayDelayed(player1, delay));
+        }
+        else
+        {
+            StartCoroutine(PlayDelayed(player2, delay));
+        }
+    }
+
     void PlayRandom(AudioClip[] clips)
     {
         m_AudioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
@@ -230,6 +265,12 @@ public class SfxManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         m_AudioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
+    }
+
+    IEnumerator PlayDelayed(AudioClip clip, float delay = 0f)
+    {
+        yield return new WaitForSeconds(delay);
+        m_AudioSource.PlayOneShot(clip);
     }
 
     private void OnDestroy()
@@ -249,5 +290,6 @@ public class SfxManager : MonoBehaviour
         Messenger.RemoveListener<PlayerController>(Events.OnHitTable, HitTable);
         Messenger.RemoveListener<PlayerController>(Events.OnSlapDeflected, Angry);
         Messenger.RemoveListener<PlayerController>(Events.OnGameOver, Win);
+        Messenger.RemoveListener<GameObject>(Events.OnSlam, Slam);
     }
 }
