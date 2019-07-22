@@ -58,7 +58,7 @@ public class SfxManager : MonoBehaviour
 
         Messenger.AddListener<PlayerController>(Events.OnSlap, Whoosh);
         Messenger.AddListener<PlayerController>(Events.OnSlapHit, Slapped);
-        Messenger.AddListener<PlayerController>(Events.OnSlapSlapped, PotatoHit);
+        Messenger.AddListener<PlayerController>(Events.OnSlapSlapped, SlapSlapped);
         Messenger.AddListener<PlayerController>(Events.OnPotatoDeflected, PotatoHit);
         Messenger.AddListener<GameObject>(Events.OnPotatoCollide, PotatoCollide);
         Messenger.AddListener<PlayerController>(Events.OnDrinkVodka, Drink);
@@ -132,6 +132,11 @@ public class SfxManager : MonoBehaviour
     private void Whoosh(PlayerController controller)
     {
         Play(Clip.Woosh);
+    }
+
+    private void SlapSlapped(PlayerController controller)
+    {
+        Play(Clip.PotatoHit);
     }
 
     private void PotatoHit(PlayerController controller)
@@ -231,7 +236,7 @@ public class SfxManager : MonoBehaviour
     {
         Messenger.RemoveListener<PlayerController>(Events.OnSlap, Whoosh);
         Messenger.RemoveListener<PlayerController>(Events.OnSlapHit, Slapped);
-        Messenger.RemoveListener<PlayerController>(Events.OnSlapSlapped, PotatoHit);
+        Messenger.RemoveListener<PlayerController>(Events.OnSlapSlapped, SlapSlapped);
         Messenger.RemoveListener<PlayerController>(Events.OnPotatoDeflected, PotatoHit);
         Messenger.RemoveListener<GameObject>(Events.OnPotatoCollide, PotatoCollide);
         Messenger.RemoveListener<PlayerController>(Events.OnDrinkVodka, Drink);
