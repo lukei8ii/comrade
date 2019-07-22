@@ -235,7 +235,8 @@ public class PlayerController : MonoBehaviour
             if (m_CurrentDrinks >= drinksToVomit)
             {
                 Messenger.Broadcast<PlayerController>(Events.OnVomit, this);
-                m_Animator.SetTrigger("Vomit");
+                SetState(State.Stunned);
+                StartCoroutine(VomitStun(stunTime));
                 m_CurrentDrinks = 0;
             } else
             {
@@ -296,6 +297,17 @@ public class PlayerController : MonoBehaviour
 
         SetState(State.Idle);
         
+        yield return null;
+    }
+
+    IEnumerator VomitStun(float seconds)
+    {
+        m_Animator.SetTrigger("Vomit");
+
+        yield return new WaitForSeconds(seconds);
+
+        SetState(State.Idle);
+
         yield return null;
     }
 

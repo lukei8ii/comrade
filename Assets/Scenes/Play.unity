@@ -6438,8 +6438,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
-  slapCooldownTime: 1.5
-  vodkaCooldownTime: 1.5
+  slapCooldownTime: 1.25
+  vodkaCooldownTime: 1.25
   potatoCooldownTime: 1.5
   enemyPlayer: {fileID: 1060143337}
   potatoPrefab: {fileID: 458799138539036035, guid: e0588d6e6322448cfa5abdb3149c23b3,
@@ -6458,7 +6458,7 @@ MonoBehaviour:
   drinkHitDelay: 1.25
   potatoThrowDelay: 0.5
   potatoHitDelay: 0.25
-  stunTime: 1.5
+  stunTime: 2
   drinksToVomit: 3
   background: {fileID: 720848026}
   eyes: {fileID: 510036033}
@@ -8167,8 +8167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 2
-  slapCooldownTime: 1.5
-  vodkaCooldownTime: 1.5
+  slapCooldownTime: 1.25
+  vodkaCooldownTime: 1.25
   potatoCooldownTime: 1.5
   enemyPlayer: {fileID: 540504715}
   potatoPrefab: {fileID: 458799138539036035, guid: e0588d6e6322448cfa5abdb3149c23b3,
@@ -8187,7 +8187,7 @@ MonoBehaviour:
   drinkHitDelay: 1.25
   potatoThrowDelay: 0.5
   potatoHitDelay: 0.25
-  stunTime: 1.5
+  stunTime: 2
   drinksToVomit: 3
   background: {fileID: 720848026}
   eyes: {fileID: 1569121841}
