@@ -77,12 +77,18 @@ public class SfxManager : MonoBehaviour
         Messenger.AddListener<PlayerController>(Events.OnHitTable, HitTable);
         Messenger.AddListener<PlayerController>(Events.OnSlapDeflected, Angry);
         Messenger.AddListener<PlayerController>(Events.OnGameOver, Win);
+        Messenger.AddListener<PlayerController>(Events.OnDraw, Draw);
         Messenger.AddListener<GameObject>(Events.OnSlam, Slam);
     }
 
     private void Slam(GameObject hand)
     {
         Play(Clip.Slam);
+    }
+
+    private void Draw(PlayerController controller)
+    {
+        Play(Clip.Bell);
     }
 
     private void Win(PlayerController controller)
@@ -290,6 +296,7 @@ public class SfxManager : MonoBehaviour
         Messenger.RemoveListener<PlayerController>(Events.OnHitTable, HitTable);
         Messenger.RemoveListener<PlayerController>(Events.OnSlapDeflected, Angry);
         Messenger.RemoveListener<PlayerController>(Events.OnGameOver, Win);
+        Messenger.RemoveListener<PlayerController>(Events.OnDraw, Draw);
         Messenger.RemoveListener<GameObject>(Events.OnSlam, Slam);
     }
 }
